@@ -76,7 +76,11 @@ So it can be used to evaluate client portfolios
 
 L'utilisation de la devise pivot pour la conversion de devises s'illustre le mieux en utilisant des exemples.
 
+Tous les taux de change doivent être définis de la devise pivot vers une autre devise.
 
-
+| Currency | Example 1 Rate from EUR to ... | Example 2 Rate from JPY to ... |
+|----------|--------------------------------|--------------------------------|
+| GBP      | 1.5                            | 3.0                            |
+| USD      | 2.0                            | 2.0                            |
 
 > 
