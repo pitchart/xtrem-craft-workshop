@@ -8,8 +8,9 @@ use PHPUnit\Framework\TestCase;
 
 class MoneyTest extends TestCase
 {
-    public function test_add_in_usd_returns_float()
+    public function test_add_in_usd_returns_value()
     {
+        $this->assertIsFloat(MoneyCalculator::add(5, Currency::USD(), 10));
         $this->assertNotNull(MoneyCalculator::add(5, Currency::USD(), 10));
     }
 

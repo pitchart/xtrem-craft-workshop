@@ -2,6 +2,8 @@
 
 namespace MoneyProblem\Domain;
 
+use function array_key_exists;
+
 class Bank
 {
     private $exchangeRates = [];
@@ -36,17 +38,7 @@ class Bank
      */
     public function addEchangeRate(Currency $currency1, Currency $currency2, float $rate): void
     {
-        $this->exchangeRates[$this->keyFor($currency1, $currency2)] = $rate;
-    }
-
-    /**
-     * @param Currency $currency1
-     * @param Currency $currency2
-     * @return string
-     */
-    private function keyFor(Currency $currency1, Currency $currency2): string
-    {
-        return $currency1 . '->' . $currency2;
+        $this->exchangeRates[($currency1 . '->' . $currency2)] = $rate;
     }
 
     /**
@@ -58,33 +50,12 @@ class Bank
      */
     public function convert(float $amount, Currency $currency1, Currency $currency2): float
     {
-        if (!$this->canConvert($currency1, $currency2)) {
+        if (!($currency1 == $currency2 || array_key_exists($currency1 . '->' . $currency2, $this->exchangeRates))) {
             throw new MissingExchangeRateException($currency1, $currency2);
         }
-        return $this->convertSafely($amount, $currency1, $currency2);
-    }
-
-    /**
-     * @param float $amount
-     * @param Currency $currency1
-     * @param Currency $currency2
-     * @return float
-     */
-    private function convertSafely(float $amount, Currency $currency1, Currency $currency2): float
-    {
         return $currency1 == $currency2
             ? $amount
-            : $amount * $this->exchangeRates[$this->keyFor($currency1, $currency2)];
-    }
-
-    /**
-     * @param Currency $currency1
-     * @param Currency $currency2
-     * @return bool
-     */
-    private function canConvert(Currency $currency1, Currency $currency2): bool
-    {
-        return $currency1 == $currency2 || array_key_exists($this->keyFor($currency1, $currency2), $this->exchangeRates);
+            : $amount * $this->exchangeRates[($currency1 . '->' . $currency2)];
     }
 
 }
