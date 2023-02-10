@@ -1,0 +1,37 @@
+{
+    "type": "project",
+    "license": "proprietary",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=7.4",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "myclabs/php-enum": "^1.8",
+        "nesbot/carbon": "^2.64",
+        "pitchart/transformer": "^1.6"
+    },
+    "require-dev": {
+        "phpspec/prophecy": "*",
+        "phpunit/phpunit": "^9.5",
+        "pitchart/phlunit": "dev-master"
+    },
+    "config": {
+        "optimize-autoloader": false,
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "MoneyProblem\\": "src/MoneyProblem/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\MoneyProblem\\": "tests/MoneyProblem/"
+        }
+    }
+
+}

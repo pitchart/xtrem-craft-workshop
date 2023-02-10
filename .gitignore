@@ -369,3 +369,8 @@ StrykerOutput
 *.stryker-temp
 coverage/
 reports/
+
+# PHP
+vendor/
+composer.phar
+composer.lock
