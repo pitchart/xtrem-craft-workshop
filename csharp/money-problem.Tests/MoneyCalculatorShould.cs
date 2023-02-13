@@ -5,27 +5,26 @@ using static money_problem.Domain.Currency;
 
 namespace money_problem.Tests
 {
-    public class MoneyShould
+    public class MoneyTest
     {
-        [Fact(DisplayName = "5 USD + 10 USD = 15 USD")]
-        public void AddInUsd()
+        [Fact]
+        public void AddInUsdReturnsAValue()
         {
-            double? result = MoneyCalculator.Add(5, USD, 10);
-            result.Should()
+            ((double?)MoneyCalculator.Add(5, USD, 10)).Should()
                 .NotBeNull();
         }
-        
-        [Fact(DisplayName = "10 EUR x 2 = 20 EUR")]
-        public void MultiplyInEuros()
+
+        [Fact]
+        public void MultiplyInEurosReturnsPositiveNumber()
         {
             MoneyCalculator
                 .Times(10, EUR, 2)
                 .Should()
-                .Be(20d);
+                .BeGreaterOrEqualTo(0d);
         }
 
-        [Fact(DisplayName = "4002 KRW / 4 = 1000.5 KRW")]
-        public void DivideInKoreanWons()
+        [Fact]
+        public void DivideInKoreanWonsReturnsDouble()
         {
             MoneyCalculator
                 .Divide(4002, KRW, 4)

@@ -8,30 +8,22 @@ namespace money_problem.Domain
 
         private Bank(Dictionary<string, double> exchangeRates) => _exchangeRates = exchangeRates;
 
-        public static Bank WithExchangeRate(Currency from, Currency to, double rate)
+        public static Bank WithExchangeRate(Currency currency1, Currency currency2, double rate)
         {
             var bank = new Bank(new Dictionary<string, double>());
-            bank.AddExchangeRate(from, to, rate);
+            bank.AddExchangeRate(currency1, currency2, rate);
 
             return bank;
         }
 
-        public void AddExchangeRate(Currency from, Currency to, double rate) 
-            => _exchangeRates[KeyFor(from, to)] =  rate;
+        public void AddExchangeRate(Currency currency1, Currency currency2, double rate)
+            => _exchangeRates[$"{currency1}->{currency2}"] =  rate;
 
-        private static string KeyFor(Currency from, Currency to) => $"{from}->{to}";
-
-        public double Convert(double amount, Currency from, Currency to) =>
-            CanConvert(from, to)
-                ? ConvertSafely(amount, from, to)
-                : throw new MissingExchangeRateException(from, to);
-
-        private double ConvertSafely(double amount, Currency from, Currency to) =>
-            to == from
-                ? amount
-                : amount * _exchangeRates[KeyFor(from, to)];
-
-        private bool CanConvert(Currency from, Currency to) =>
-            from == to || _exchangeRates.ContainsKey(KeyFor(from, to));
+        public double Convert(double amount, Currency currency1, Currency currency2) =>
+            currency1 == currency2 || _exchangeRates.ContainsKey($"{currency1}->{currency2}")
+                ? currency2 == currency1
+                    ? amount
+                    : amount * _exchangeRates[$"{currency1}->{currency2}"]
+                : throw new MissingExchangeRateException(currency1, currency2);
     }
 }
