@@ -10,35 +10,24 @@ public final class Bank {
         this.exchangeRates = exchangeRates;
     }
 
-    public static Bank withExchangeRate(Currency from, Currency to, double rate) {
+    public static Bank withExchangeRate(Currency currency1, Currency currency2, double rate) {
         var bank = new Bank(new HashMap<>());
-        bank.addExchangeRate(from, to, rate);
+        bank.addExchangeRate(currency1, currency2, rate);
 
         return bank;
     }
 
-    public void addExchangeRate(Currency from, Currency to, double rate) {
-        exchangeRates.put(keyFor(from, to), rate);
+    public void addExchangeRate(Currency currency1, Currency currency2, double rate) {
+        exchangeRates.put(currency1 + "->" + currency2, rate);
     }
 
-    private static String keyFor(Currency from, Currency to) {
-        return from + "->" + to;
-    }
-
-    public double convert(double amount, Currency from, Currency to) throws MissingExchangeRateException {
-        if (!canConvert(from, to)) {
-            throw new MissingExchangeRateException(from, to);
+    public double convert(double amount, Currency currency1, Currency currency2) throws MissingExchangeRateException {
+        if (!(currency1 == currency2 || exchangeRates.containsKey(currency1 + "->" + currency2))) {
+            throw new MissingExchangeRateException(currency1, currency2);
         }
-        return convertSafely(amount, from, to);
-    }
-
-    private double convertSafely(double amount, Currency from, Currency to) {
-        return from == to
+        return currency1 == currency2
                 ? amount
-                : amount * exchangeRates.get(keyFor(from, to));
+                : amount * exchangeRates.get(currency1 + "->" + currency2);
     }
 
-    private boolean canConvert(Currency from, Currency to) {
-        return from == to || exchangeRates.containsKey(keyFor(from, to));
-    }
 }
