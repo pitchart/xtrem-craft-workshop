@@ -1,9 +1,9 @@
-## Shared understanding on the Bank with Example Mapping
+## Example Mapping
 
 Prendre quelques instants pour lire à propos de l'[Example Mapping](https://xtrem-tdd.netlify.app/Flavours/example-mapping).
 
-### The Problem
-- We have worked closely with our domain experts and at one point we spotted a problem together with the exchange rates
+### Le problème
+Nous avons travaillé avec les experts métier et nous avons identifié un problème dans la gestion des taux de changes.
 
 | From | To   | Rate    |
 |------|------|---------|
@@ -14,10 +14,10 @@ Prendre quelques instants pour lire à propos de l'[Example Mapping](https://xtr
 | EUR  | KRW  | 1344    |
 | KRW  | EUR  | 0.00073 |
 
-- We have 2 times a line for `KRW` to `EUR`
-- We discussed with our experts, and they explain to us that they have `simply` written the wrong destination currency (To) on line 4 (Apparently, it can often happens...)
+- Nous avons 2 lignes de conversion `KRW` vers `EUR`
+- Nous avons échangé avec nos experts, et ils nous ont expliqué qu'ils avaient *simplement* saisi la mauvaise devise de destination (To) sur la ligne 4 (apparemment, cela arrive souvent ...)
 
-After a fix, the table now looks like this:
+Après correction, la table de conversion est donc :
 
 | From | To  | Rate    |
 |------|-----|---------|
@@ -28,12 +28,11 @@ After a fix, the table now looks like this:
 | EUR  | KRW | 1344    |
 | KRW  | EUR | 0.00073 |
 
-- We are not fully confident in this table that will be at the center of our system
-    - We discuss again with our experts on a way to enforce this table coherence/consistency
-    - The conclusion is that we can easily improve it by checking what they call `Round-Tripping`
-    - `from(to(x)) == x`
+Nous ne sommes pas complètement confiants dans cette table qui est l'élément central de notre système
+- Nous avons encore échangé avec nos experts métier sur un moyen de consolider cette table
+- La conclusion est que nous pouvons l'améliorer facilement en vérifiant ce qu'ils appellent *Round-Tripping* : `from(to(x)) == x`
 
-In other terms
+En d'autres termes :
 
 ```gherkin
 Given an original amount in currency A
@@ -41,13 +40,13 @@ When we convert it to currency B and convert it back to currency A
 Then we should receive the original amount 
 ```
 
-From this step, we discover:
-- missing invariants / business rules in our domain
-- a misalignment on the Bank comprehension with our domain experts
+A cette étape, nous constatons :
+- Des invariants / règles métier manquants
+- un manque d'alignement sur la compréhension du fonctionnement de la banque avec nos experts métier
 
-We asked our business experts to be more explicit on the features provided by a Bank.
+Nous avons demandé aux experts métier d'être plus explicites sur les fonctionnalités fournies par une banque.
 
-They worked on it and detailed some `User Stories` and defined some concepts to add to our `Ubiquitous Language`.
+Ils ont travaillé sur le sujet et ont rédigé des **User Stories** et défini des concepts à ajouter à notre **Ubiquitous Language**. 
 
 - **Story 1: Define Pivot Currency**
 ```gherkin
@@ -70,7 +69,7 @@ So it can be used to evaluate client portfolios
 
 ## Ubiquitous Language
 
-**Pivot Currency**: The pivot currency is the currency via which the other currency values are calculated.
+**Pivot Currency**: La devise pivot est la devise grâce à laquelle les valeurs des autres devises sont calculées
 
 ## Fonctionnement d'une devise pivot ?
 
@@ -83,4 +82,12 @@ Tous les taux de change doivent être définis de la devise pivot vers une autre
 | GBP      | 1.5                            | 3.0                            |
 | USD      | 2.0                            | 2.0                            |
 
-> 
+## Example mapping
+
+![](../img/example-mapping.png)
+
+- Commencer par écrire la *User Story* à affiner (sur un post-it jaune) et la placer au centre de la table
+- Ensuite, écrire chaque critère d'acceptation ou règle métier existante sur un post-it bleu et les placer sous celui de la User Story.
+- Pour chaque règle, nous avons besoin d'un ou plusieurs exemples pour les illustrer. Les écrire sur des post-it verts et les placer sous la règle correspondante.
+- En échangeant sur ces exemples, vous pouvez découvrir des questions pour lesquelles personne autour de la table ne peut répondre : les écrire sur des post-it rouges et continuer la conversation. 
+
