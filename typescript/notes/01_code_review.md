@@ -23,3 +23,4 @@ C BON:
 A AJOUTER:
 
 Un "npm run lint" qui lance eslint sur le projet
+- Extraire plusieurs méthodes privées depuis convert, notamment canConvert(Currency, Currency)
