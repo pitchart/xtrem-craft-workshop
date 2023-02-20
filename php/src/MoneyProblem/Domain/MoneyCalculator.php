@@ -4,18 +4,18 @@ namespace MoneyProblem\Domain;
 
 class MoneyCalculator
 {
-    public static function add(float $amount, float $amount2): float
+    public static function add(float $firstAmount, float $secondAmount): float
     {
-        return $amount + $amount2;
+        return $firstAmount + $secondAmount;
     }
 
-    public static function times(float $amount, int $value): float
+    public static function times(float $firstAmount, int $value): float
     {
-        return $amount * $value;
+        return $firstAmount * $value;
     }
 
-    public static function divide(float $amount, int $value): float
+    public static function divide(float $firstAmount, int $value): float
     {
-        return $amount / $value;
+        return $firstAmount / $value;
     }
 }

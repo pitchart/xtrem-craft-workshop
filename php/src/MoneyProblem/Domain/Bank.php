@@ -8,54 +8,42 @@ class Bank
 {
     private $exchangeRates = [];
 
-    /**
-     * @param array $exchangeRates
-     */
     public function __construct(array $exchangeRates = [])
     {
         $this->exchangeRates = $exchangeRates;
     }
-
-    /**
-     * @param Currency $currencyFrom
-     * @param Currency $currencyTo
-     * @param float $rate
-     * @return Bank
-     */
-    public static function create(Currency $currencyFrom, Currency $currencyTo, float $rate)
+    
+    public static function create(Currency $from, Currency $to, float $rate) : Bank
     {
         $bank = new Bank([]);
-        $bank->addEchangeRate($currencyFrom, $currencyTo, $rate);
+        $bank->addEchangeRate($from, $to, $rate);
 
         return $bank;
     }
 
-    /**
-     * @param Currency $currencyFrom
-     * @param Currency $currencyTo
-     * @param float $rate
-     * @return void
-     */
-    public function addEchangeRate(Currency $currencyFrom, Currency $currencyTo, float $rate): void
+    public function addEchangeRate(Currency $from, Currency $to, float $rate): void
     {
-        $this->exchangeRates[($currencyFrom . '->' . $currencyTo)] = $rate;
+        $this->exchangeRates[$this->searchCurrency($from, $to)] = $rate;
     }
 
     /**
-     * @param float $amount
-     * @param Currency $currencyFrom
-     * @param Currency $currencyTo
-     * @return float
      * @throws MissingExchangeRateException
      */
-    public function convert(float $amount, Currency $currencyFrom, Currency $currencyTo): float
+    public function convert(float $amount, Currency $from, Currency $to): float
     {
-        if (!($currencyFrom == $currencyTo || array_key_exists($currencyFrom . '->' . $currencyTo, $this->exchangeRates))) {
-            throw new MissingExchangeRateException($currencyFrom, $currencyTo);
+        if (!$this->canConvert($from,$to)) {
+            throw new MissingExchangeRateException($from, $to);
         }
-        return $currencyFrom == $currencyTo
-            ? $amount
-            : $amount * $this->exchangeRates[($currencyFrom . '->' . $currencyTo)];
+        return $from == $to 
+        ? $amount 
+        : $amount * $this->exchangeRates[$this->searchCurrency($from, $to)];
     }
 
+    private function canConvert(Currency $from, Currency $to){
+        return ($from == $to || array_key_exists($this->searchCurrency($from, $to), $this->exchangeRates));
+    }
+
+    private function searchCurrency(Currency $from, Currency $to) { 
+        return ($from . '->' . $to);
+    }
 }
