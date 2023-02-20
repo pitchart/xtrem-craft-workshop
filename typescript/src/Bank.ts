@@ -4,42 +4,46 @@ import { MissingExchangeRateError } from './MissingExchangeRateError'
 export class Bank {
   private readonly _exchangeRates: Map<string, number> = new Map()
 
+  private canConvert (fromCUrrency: Currency, toCurrency: Currency): Boolean {
+    return fromCUrrency === toCurrency || this._exchangeRates.has(fromCUrrency + '->' + toCurrency)
+  }
+
   /**
-   * @param currency1
-   * @param currency2
-   * @param rate
+   * @param fromCurrency currency d'entrée
+   * @param toCurrency   cureency retourné
+   * @param rate taux de conversion
+   * Fonction qui permet de convertir une monnaie en une autre avec un taux donné.
+   * Méthode static qui instancie l'objet pour permettre le chainage.
    */
-  static withExchangeRate (currency1: Currency, currency2: Currency, rate: number): Bank {
+  static withExchangeRate (fromCurrency: Currency, toCurrency: Currency, rate: number): Bank {
     const bank = new Bank()
-    bank.AddExchangeRate(currency1, currency2, rate)
+    bank.AddExchangeRate(fromCurrency, toCurrency, rate)
     return bank
   }
 
   /**
-   * @param currency1
-   * @param currency2
+   * @param fromCurrency
+   * @param toCurrency
    * @param rate
+   * Ajoute un taux d'échange a la liste de taux
    */
-  AddExchangeRate (currency1: Currency, currency2: Currency, rate: number): void {
-    this._exchangeRates.set(currency1 + '->' + currency2, rate)
+  AddExchangeRate (fromCurrency: Currency, toCurrency: Currency, rate: number): void {
+    this._exchangeRates.set(fromCurrency + '->' + toCurrency, rate)
   }
 
   /**
    * @param amount
-   * @param currency1
-   * @param currency2
+   * @param fromCurrency
+   * @param toCurrency
+   * Converti un montant de fromCurrency en montant de toCurrency.
+   * Si le taux est connu et present dans la liste des taux.
    */
-  Convert (amount: number, currency1: Currency, currency2: Currency): number {
-    if (!this.canConvert(currency1, currency2).valueOf()) {
-      throw new MissingExchangeRateError(currency1, currency2)
+  Convert (amount: number, fromCurrency: Currency, toCurrency: Currency): number {
+    if (!this.canConvert(fromCurrency, toCurrency).valueOf()) {
+      throw new MissingExchangeRateError(fromCurrency, toCurrency)
     }
-
-    return currency2 === currency1
+    return toCurrency === fromCurrency
       ? amount
-      : amount * this._exchangeRates.get(currency1 + '->' + currency2)
-  }
-
-  private canConvert (currency1: Currency, currency2: Currency): Boolean {
-    return currency1 === currency2 || this._exchangeRates.has(currency1 + '->' + currency2)
+      : amount * this._exchangeRates.get(fromCurrency + '->' + toCurrency)
   }
 }

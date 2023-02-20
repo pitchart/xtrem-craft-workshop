@@ -3,7 +3,6 @@ import { Bank } from '../src/Bank'
 import { MissingExchangeRateError } from '../src/MissingExchangeRateError'
 
 describe('Bank', function () {
-
   test('convert from eur to usd returns number', () => {
     expect(Bank.withExchangeRate(Currency.EUR, Currency.USD, 1.2).Convert(10, Currency.EUR, Currency.USD)).toBe(12)
   })
