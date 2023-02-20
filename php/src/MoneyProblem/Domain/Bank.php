@@ -61,7 +61,7 @@ class Bank
 
     public function isConvertNonValid(Currency $fromDevise, Currency $toDevise): bool
     {
-        return (!($toDevise === $fromDevise || array_key_exists($this->getKey($fromDevise, $toDevise), $this->exchangeRates)));
+        return ($fromDevise !== $toDevise && !array_key_exists($this->getKey($toDevise, $fromDevise), $this->exchangeRates));
     }
 
     public function getKey(Currency $fromDevise, Currency $toDevise) : string {
