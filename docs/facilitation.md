@@ -30,7 +30,7 @@ To build it, we'd need to do simple arithmetic operations on numbers :
 | EUR  | USD  | 1.2     |
 | USD  | EUR  | 0.82    |
 | USD  | KRW  | 1100    |
-| KRW  | EUR  | 0.0009  |
+| KRW  | EUR  | 0.0009  | KRW USD
 | EUR  | KRW  | 1344    |
 | KRW  | EUR  | 0.00073 |
 
