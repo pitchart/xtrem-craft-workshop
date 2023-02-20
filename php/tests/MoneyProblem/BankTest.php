@@ -12,12 +12,26 @@ class BankTest extends TestCase
 
     public function test_convert_eur_to_usd_returns_float()
     {
-        $this->assertEquals(12, Bank::create(Currency::EUR(), Currency::USD(), 1.2)->convert(10, Currency::EUR(), Currency::USD()));
+        // Arrange
+        $bank = Bank::create(Currency::EUR(), Currency::USD(), 1.2);
+
+        // Act
+        $convert = $bank->convert(10, Currency::EUR(), Currency::USD());
+
+        // Assert
+        $this->assertEquals(12, $convert);
     }
 
     public function test_convert_eur_to_eur_returns_same_value()
     {
-        $this->assertEquals(10, Bank::create(Currency::EUR(), Currency::USD(), 1.2)->convert(10, Currency::EUR(), Currency::EUR()));
+        // Arrange
+        $bank = Bank::create(Currency::EUR(), Currency::USD(), 1.2);
+
+        // Act
+        $convert = $bank->convert(10, Currency::EUR(), Currency::EUR());
+
+        // Assert
+        $this->assertEquals(10, $convert);
     }
 
     public function test_convert_throws_exception_on_missing_exchange_rate()
@@ -30,13 +44,20 @@ class BankTest extends TestCase
 
     public function test_convert_with_different_exchange_rates_returns_different_floats()
     {
+        // Arrange
         $bank = Bank::create(Currency::EUR(), Currency::USD(), 1.2);
 
-        $this->assertEquals(12, $bank->convert(10, Currency::EUR(), Currency::USD()));
+        // Act
+        $convert = $bank->convert(10, Currency::EUR(), Currency::USD());
 
+        // Asset
+        $this->assertEquals(12, $convert);
+
+        // Act
         $bank->addEchangeRate(Currency::EUR(), Currency::USD(), 1.3);
-
-        $this->assertEquals(13, $bank->convert(10, Currency::EUR(), Currency::USD()));
+        $convert = $bank->convert(10, Currency::EUR(), Currency::USD());
+        // Asset
+        $this->assertEquals(13, $convert);
     }
 
 }
