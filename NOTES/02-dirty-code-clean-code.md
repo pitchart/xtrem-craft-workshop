@@ -1,0 +1,22 @@
+# Clean code VS Dirty code
+ 
+- Qu'est-ce que du code sale ?
+  - nom de variable pas explicite
+  - Fonctions trop longues ou trop de pramètres
+  - code mort (code commenté, pas utilisé ou import inutile)
+  - code complexe à comprendre
+  - Overingeneering
+  - Duplication
+  - Pas de tests
+- Qu'est-ce que du code propre ?
+  - Bonne architecture des fichiers et bonne indentation du code
+  - Règles de nommenclature respectées
+  - Compréhensible assez vite 
+  - Tests unitaires
+  - Utilisation du sucre syntaxique à bon escient, c'est-à-dire qu'il ne doit complexifier le code
+  - Instalation simple / avoir de l'automatisation
+  - Safe
+  - Faible complexité cyclomatique
+  - Nommage selon l'Ubiquitous language
+  - KISS / YAGNI
+  - SOLID
