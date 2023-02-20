@@ -8,19 +8,22 @@ use PHPUnit\Framework\TestCase;
 
 class MoneyTest extends TestCase
 {
-    public function test_add_in_usd_returns_value()
+    public function test_add()
     {
-        $this->assertIsFloat(MoneyCalculator::add(5, 10));
-        $this->assertNotNull(MoneyCalculator::add(5, 10));
+        $value = MoneyCalculator::add(5, Currency::USD(),10);
+        $this->assertIsFloat($value);
+        $this->assertNotNull($value);
     }
 
-    public function test_multiply_in_euros_returns_positive_number()
+    public function test_multiply()
     {
-        $this->assertLessThan(MoneyCalculator::times(10, 2), 0);
+        $value= MoneyCalculator::times(10, Currency::USD(), 2);
+        $this->assertLessThan($value, 10);
     }
 
-    public function test_divide_in_korean_won_returns_float()
+    public function test_divide()
     {
-        $this->assertEquals(MoneyCalculator::divide(4002, 4), 1000.5);
+        $value = MoneyCalculator::divide(4002, Currency::USD(), 4);
+        $this->assertEquals($value, 1000.5);
     }
 }
