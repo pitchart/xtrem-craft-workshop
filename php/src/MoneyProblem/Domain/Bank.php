@@ -31,16 +31,19 @@ class Bank
      */
     public function convert(float $amount, Currency $from, Currency $to): float
     {
+
+        if($from == $to)
+        {
+            return $amount;
+        }
         if (!$this->canConvert($from,$to)) {
             throw new MissingExchangeRateException($from, $to);
         }
-        return $from == $to 
-        ? $amount 
-        : $amount * $this->exchangeRates[$this->searchCurrency($from, $to)];
+        return $amount * $this->exchangeRates[$this->searchCurrency($from, $to)];;
     }
 
     private function canConvert(Currency $from, Currency $to){
-        return ($from == $to || array_key_exists($this->searchCurrency($from, $to), $this->exchangeRates));
+        return (array_key_exists($this->searchCurrency($from, $to), $this->exchangeRates));
     }
 
     private function searchCurrency(Currency $from, Currency $to) { 
