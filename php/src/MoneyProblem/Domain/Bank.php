@@ -2,11 +2,12 @@
 
 namespace MoneyProblem\Domain;
 
+use phpDocumentor\Reflection\Types\Boolean;
 use function array_key_exists;
 
 class Bank
 {
-    private $exchangeRates = [];
+    private array $exchangeRates;
 
     /**
      * @param array $exchangeRates
@@ -22,7 +23,7 @@ class Bank
      * @param float $rate
      * @return Bank
      */
-    public static function create(Currency $currency1, Currency $currency2, float $rate)
+    public static function create(Currency $currency1, Currency $currency2, float $rate) : Bank
     {
         $bank = new Bank([]);
         $bank->addEchangeRate($currency1, $currency2, $rate);
@@ -31,31 +32,39 @@ class Bank
     }
 
     /**
-     * @param Currency $currency1
-     * @param Currency $currency2
+     * @param Currency $fromDevise
+     * @param Currency $toDevise
      * @param float $rate
      * @return void
      */
-    public function addEchangeRate(Currency $currency1, Currency $currency2, float $rate): void
+    public function addEchangeRate(Currency $fromDevise, Currency $toDevise, float $rate): void
     {
-        $this->exchangeRates[($currency1 . '->' . $currency2)] = $rate;
+        $this->exchangeRates[($this->getKey($fromDevise, $toDevise))] = $rate;
     }
 
     /**
      * @param float $amount
-     * @param Currency $currency1
-     * @param Currency $currency2
+     * @param Currency $fromDevise
+     * @param Currency $toDevise
      * @return float
      * @throws MissingExchangeRateException
      */
-    public function convert(float $amount, Currency $currency1, Currency $currency2): float
+    public function convert(float $amount, Currency $fromDevise, Currency $toDevise): float
     {
-        if (!($currency1 == $currency2 || array_key_exists($currency1 . '->' . $currency2, $this->exchangeRates))) {
-            throw new MissingExchangeRateException($currency1, $currency2);
+        if ($this->isConvertNonValid($fromDevise, $toDevise)) {
+            throw new MissingExchangeRateException($fromDevise, $toDevise);
         }
-        return $currency1 == $currency2
+        return $fromDevise === $toDevise
             ? $amount
-            : $amount * $this->exchangeRates[($currency1 . '->' . $currency2)];
+            : $amount * $this->exchangeRates[($this->getKey($fromDevise, $toDevise))];
     }
 
+    public function isConvertNonValid(Currency $fromDevise, Currency $toDevise): bool
+    {
+        return (!($toDevise === $fromDevise || array_key_exists($this->getKey($fromDevise, $toDevise), $this->exchangeRates)));
+    }
+
+    public function getKey(Currency $fromDevise, Currency $toDevise) : string {
+        return $fromDevise . '->' . $toDevise;
+    }
 }
