@@ -21,7 +21,7 @@ describe('Bank', function () {
   test('Should throw error in case of missing exchange rates', () => {
     const bank: Bank = Bank.createBankWithExchangeRate(Currency.EUR, Currency.USD, 1.2)
     // When - Then
-    expect(() => bank.Convert(10, Currency.EUR, Currency.KRW)).toThrow(MissingExchangeRateError)
+    expect(() => bank.Convert(10, Currency.EUR, Currency.KRW)).toThrow(MissingExchangeRateError).toThrow('EUR->KRW')
   })
 
   test('Should return different numbers when converting with different exchange rates', () => {
