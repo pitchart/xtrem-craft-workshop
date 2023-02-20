@@ -6,16 +6,16 @@ Qu'est-ce que du code sale ?
 - Méthode trop longue
 - Variable non typé
 - Trop de commentaires (sous-entend que le code est incompréhensible)
-- Non respect de la convention (nommage etc)
+- Non-respect de la convention (nommage etc)
 - Code pas architecturé
 - Code pas documenté
 - Code sans tests
 
 Qu'est-ce que du code propre ?
-- Code compréhensible en un coup d'oeil
-- Commentaires simple
+- Code compréhensible en un coup d'œil
+- Commentaires simples
 - Code pas complexe
 - Mise en place de la phpdoc
 - Code avec des tests
-- Respect d'une achitecture (mvc par exemple)
+- Respect d'une architecture (mvc par exemple)
 - Variable explicite
