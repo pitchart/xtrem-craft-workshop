@@ -30,9 +30,7 @@ export class Bank {
    * @param currency2
    */
   Convert (amount: number, currency1: Currency, currency2: Currency): number {
-    if( ! this.canConvert(currency1, currency2)){
-      throw new MissingExchangeRateError(currency1, currency2)
-    }
+    this.canConvert(currency1, currency2)
 
     return currency2 === currency1
         ? amount
