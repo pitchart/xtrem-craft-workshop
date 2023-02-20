@@ -1,11 +1,12 @@
 import { Currency } from './Currency'
+import { ExchangeRates } from './ExchangeRates'
 import { MissingExchangeRateError } from './MissingExchangeRateError'
 
 export class Bank {
-  private readonly _exchangeRates: Map<string, number> = new Map()
+  private readonly exchangeRates = new ExchangeRates
 
-  private canConvert (fromCUrrency: Currency, toCurrency: Currency): Boolean {
-    return fromCUrrency === toCurrency || this._exchangeRates.has(fromCUrrency + '->' + toCurrency)
+  private canConvert (fromCurrency: Currency, toCurrency: Currency): Boolean {
+    return fromCurrency === toCurrency || this.exchangeRates.hasRate(fromCurrency, toCurrency)
   }
 
   /**
@@ -28,7 +29,7 @@ export class Bank {
    * Ajoute un taux d'échange a la liste de taux
    */
   AddExchangeRate (fromCurrency: Currency, toCurrency: Currency, rate: number): void {
-    this._exchangeRates.set(fromCurrency + '->' + toCurrency, rate)
+    this.exchangeRates.setRate(fromCurrency, toCurrency, rate)
   }
 
   /**
@@ -44,6 +45,6 @@ export class Bank {
     }
     return toCurrency === fromCurrency
       ? amount
-      : amount * this._exchangeRates.get(fromCurrency + '->' + toCurrency)
+      : amount * this.exchangeRates.getRate(fromCurrency, toCurrency)
   }
 }
