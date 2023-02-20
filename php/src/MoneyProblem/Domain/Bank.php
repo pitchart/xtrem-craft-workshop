@@ -54,14 +54,14 @@ class Bank
         if ($this->isConvertNonValid($fromDevise, $toDevise)) {
             throw new MissingExchangeRateException($fromDevise, $toDevise);
         }
-        return $fromDevise === $toDevise
+        return $fromDevise == $toDevise
             ? $amount
             : $amount * $this->exchangeRates[($this->getKey($fromDevise, $toDevise))];
     }
 
     public function isConvertNonValid(Currency $fromDevise, Currency $toDevise): bool
     {
-        return (!(($fromDevise === $toDevise) || array_key_exists($this->getKey($fromDevise, $toDevise), $this->exchangeRates)));
+        return ($fromDevise != $toDevise && !array_key_exists($this->getKey($fromDevise, $toDevise), $this->exchangeRates));
     }
 
     public function getKey(Currency $fromDevise, Currency $toDevise) : string {
