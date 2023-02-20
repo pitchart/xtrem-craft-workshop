@@ -10,12 +10,19 @@ Qu'est-ce que du code sale ?
 - Code pas architecturé
 - Code pas documenté
 - Code sans tests
+- Overingeneeing
+- Failles de sécurités
 
 Qu'est-ce que du code propre ?
 - Code compréhensible en un coup d'œil
 - Commentaires simples
-- Code pas complexe
+- Code avec une faible complexité
 - Mise en place de la phpdoc
 - Code avec des tests
 - Respect d'une architecture (mvc par exemple)
-- Variable explicite
+- Nommage explicite
+- KISS (Keep it Simple, Stupid)
+- Simple d'installation / automatisation
+- Safe
+- YAGNI (You Aren't Gonna Need It)
+- SOLID
