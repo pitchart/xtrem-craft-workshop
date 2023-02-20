@@ -12,6 +12,6 @@ describe('Money', function () {
   })
 
   test('divide in korean won returns number', () => {
-    expect(1000.5, ).toBe(MoneyCalculator.Divide(4002, Currency.KRW, 4))
+    expect(1000.5).toBe(MoneyCalculator.Divide(4002, Currency.KRW, 4))
   })
 })

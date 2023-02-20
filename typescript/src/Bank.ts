@@ -1,39 +1,34 @@
-import {Currency} from './Currency'
-import {MissingExchangeRateError} from './MissingExchangeRateError'
+import { Currency } from './Currency'
+import { MissingExchangeRateError } from './MissingExchangeRateError'
 
 export class Bank {
   private readonly _exchangeRates: Map<string, number> = new Map()
 
-  /**
-   * @param currency1
-   * @param currency2
-   * @param rate
-   */
-  static withExchangeRate (currency1: Currency, currency2: Currency, rate: number): Bank {
+  static createBankWithExchangeRate (from: Currency, to: Currency, rate: number): Bank {
     const bank = new Bank()
-    bank.AddExchangeRate(currency1, currency2, rate)
+    bank.AddExchangeRate(from, to, rate)
     return bank
   }
 
-  /**
-   * @param currency1
-   * @param currency2
-   * @param rate
-   */
-  AddExchangeRate (currency1: Currency, currency2: Currency, rate: number): void {
-    this._exchangeRates.set(currency1 + '->' + currency2, rate)
+  AddExchangeRate (from: Currency, to: Currency, rate: number): void {
+    this._exchangeRates.set(this.createKey(from, to), rate)
   }
 
-  /**
-   * @param amount
-   * @param currency1
-   * @param currency2
-   */
-  Convert (amount: number, currency1: Currency, currency2: Currency): number {
-    if (!(currency1 === currency2 || this._exchangeRates.has(currency1 + '->' + currency2))) { throw new MissingExchangeRateError(currency1, currency2) }
+  Convert (amount: number, original: Currency, converted: Currency): number {
+    if (!this.canConvert(original, converted)) {
+      throw new MissingExchangeRateError(original, converted)
+    }
 
-    return currency2 === currency1
+    return converted === original
       ? amount
-      : amount * this._exchangeRates.get(currency1 + '->' + currency2)
+      : amount * this._exchangeRates.get(this.createKey(original, converted))
+  }
+
+  private canConvert (original: Currency, converted: Currency): boolean {
+    return (original === converted || this._exchangeRates.has(this.createKey(original, converted)))
+  }
+
+  private createKey (original: Currency, converted: Currency): string {
+    return original + '->' + converted
   }
 }

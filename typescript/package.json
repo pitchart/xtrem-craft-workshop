@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest",
     "tdd": "jest --watchAll",
-    "coverage": "jest --collect-coverage"
+    "coverage": "jest --collect-coverage",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
   },
   "author": "",
   "license": "ISC",

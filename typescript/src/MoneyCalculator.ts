@@ -1,7 +1,8 @@
 import { Currency } from './Currency'
 
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class MoneyCalculator {
-  static Add = (amount: number, currency: Currency, amount2: number): number => amount + amount2
-  static Times = (amount: number, currency: Currency, number: number): number => amount * number
-  static Divide = (amount: number, currency: Currency, value: number): number => amount / value
+  static Add = (leftMember: number, currency: Currency, rightMember: number): number => leftMember + rightMember
+  static Times = (leftMember: number, currency: Currency, rightMember: number): number => leftMember * rightMember
+  static Divide = (leftMember: number, currency: Currency, rightMember: number): number => leftMember / rightMember
 }
