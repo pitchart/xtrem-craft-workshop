@@ -24,15 +24,15 @@ class BankTest {
     void convertEurToEur() throws MissingExchangeRateException {
         final Bank bank = Bank.withExchangeRate(EUR, USD, 1.2);
         final double conversion = bank.convertFromTo(10, EUR, USD);
-        
+
         assertThat(conversion).isEqualTo(10);
     }
 
     @Test
-    void convertThrowsExceptionOnMissingExchangeRate() throws MissingExchangeRateException {
+    void convertThrowsExceptionOnMissingExchangeRate() {
         final Bank bank = Bank.withExchangeRate(EUR, USD, 1.2);
-        final double conversion = bank.convertFromTo(10, EUR, KRW);
-        assertThatThrownBy(() -> conversion)
+
+        assertThatThrownBy(() -> bank.convertFromTo(10, EUR, KRW))
                 .isInstanceOf(MissingExchangeRateException.class)
                 .hasMessage("EUR->KRW");
     }
