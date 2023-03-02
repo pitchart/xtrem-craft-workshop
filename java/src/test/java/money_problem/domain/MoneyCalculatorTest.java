@@ -20,8 +20,12 @@ class MoneyCalculatorTest {
     }
 
     @Test
+    static
     void shouldDivideInKoreanWons() {
         assertThat(MoneyCalculator.divide(4002, KRW, 4))
                 .isEqualTo(1000.5);
+    }
+    public static void main(String[] args) {
+        System.out.print("bonjour");
     }
 }

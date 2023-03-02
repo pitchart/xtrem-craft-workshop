@@ -21,17 +21,17 @@ public final class Bank {
         exchangeRates.put(currency1 + "->" + currency2, rate);
     }
 
-    public double convert(double amount, Currency currency1, Currency currency2) throws MissingExchangeRateException {
-        if (!isSameCurrency(currency1, currency2)) {
-            throw new MissingExchangeRateException(currency1, currency2);
+    public double convertFromTo(double amount, Currency baseCurrency, Currency expectedCurrency) throws MissingExchangeRateException {
+        if (!isValidConvertion(baseCurrency, expectedCurrency)) {
+            throw new MissingExchangeRateException(baseCurrency, expectedCurrency);
         }
-        return currency1 == currency2
+        return baseCurrency == expectedCurrency
                 ? amount
-                : amount * exchangeRates.get(currency1 + "->" + currency2);
+                : amount * exchangeRates.get(baseCurrency + "->" + expectedCurrency);
     }
 
-    private boolean isSameCurrency(Currency currency1, Currency currency2) {
-        return (currency1 == currency2 || exchangeRates.containsKey(currency1 + "->" + currency2));
+    private boolean isValidConvertion(Currency baseCurrency, Currency expectedCurrency) {
+        return (baseCurrency == expectedCurrency || exchangeRates.containsKey(baseCurrency + "->" + expectedCurrency));
     }
 
 }
