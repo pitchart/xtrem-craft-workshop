@@ -42,7 +42,7 @@ describe('Portfolio', function () {
         expect(result).toBe(0);
     });
 
-    it('', ()=>{
+    it('should add 5 usd', ()=>{
         //arrange
         const portfolio = new Portfolio();
         portfolio.add(5, Currency.USD);
