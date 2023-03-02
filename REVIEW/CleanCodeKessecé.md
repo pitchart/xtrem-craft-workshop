@@ -1,6 +1,6 @@
 # Quest-ce que du clean code ? 
 
-C'est un code qui essaye de rester commenté, bien indenté, compréhensible (i.e. nom de variable clairs), qui respecte les principes SOLID, DRY (Dont Repeat Yourself), KISS (Keep It Simple Stupid), methodes de MosCow
+C'est un code qui essaye de rester commenté, bien indenté, compréhensible (i.e. nom de variable clairs), qui respecte les principes SOLID, DRY (Dont Repeat Yourself), KISS (Keep It Simple Stupid)
 
 SOLID principles are 5 concepts that will help us make our programs better.
 
