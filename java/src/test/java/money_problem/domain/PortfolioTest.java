@@ -13,7 +13,7 @@ public class PortfolioTest {
 
     @Test
     @DisplayName("5 USD + 10 EUR = 17 USD")
-    void shouldAdd(){
+    void shouldAdd() {
         //Arrange
         final Portfolio portfolio = new Portfolio();
         portfolio.add(5,EUR);
@@ -28,7 +28,7 @@ public class PortfolioTest {
 
     @Test
     @DisplayName("should Be Evaluated To Zero When Empty")
-    void evaluateEmptyPortfolio(){
+    void evaluateEmptyPortfolio() {
         //Arrange
         final Portfolio portfolio = new Portfolio();
 
@@ -37,5 +37,19 @@ public class PortfolioTest {
 
         //Assert
         assertThat(result).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("portfolio should be equal to portfolio")
+    void portfolioEqualsPortfolio() {
+        //Arrange
+        final Portfolio portfolio = new Portfolio();
+        portfolio.add(5, USD);
+
+        //Act
+        final double result = portfolio.evaluate(USD, bank);
+
+        //Assert
+        assertThat(result).isEqualTo(5);
     }
 }
