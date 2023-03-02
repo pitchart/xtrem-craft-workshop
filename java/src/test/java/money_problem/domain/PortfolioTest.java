@@ -3,8 +3,8 @@ import jdk.jfr.Description;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static money_problem.domain.Currency.EUR;
-import static money_problem.domain.Currency.USD;
+import static money_problem.domain.Currency.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PortfolioTest {
@@ -13,17 +13,32 @@ public class PortfolioTest {
 
     @Test
     @DisplayName("5 USD + 10 EUR = 17 USD")
-    void shouldAdd() {
+    void shouldAdd1() {
         //Arrange
         final Portfolio portfolio = new Portfolio();
-        portfolio.add(5,EUR);
-        portfolio.add(10, USD);
+        portfolio.add(5,USD);
+        portfolio.add(10, EUR);
 
         //Act
         final double result = portfolio.evaluate(USD, bank);
 
         //Assert
         assertThat(result).isEqualTo(17);
+    }
+
+    @Test
+    @DisplayName("1 USD + 1100KRW = 2200KRW")
+    void shouldAdd2() {
+        //Arrange
+        final Portfolio portfolio = new Portfolio();
+        portfolio.add(1,USD);
+        portfolio.add(1100, KRW);
+
+        //Act
+        final double result = portfolio.evaluate(KRW, bank);
+
+        //Assert
+        assertThat(result).isEqualTo(2200);
     }
 
     @Test
