@@ -44,4 +44,6 @@ class BankTest {
         assertThat(bank.convertFromTo(10, EUR, USD))
                 .isEqualTo(13);
     }
+
+
 }

@@ -22,7 +22,14 @@ public class PortfolioTest {
 
         //Assert
         assertThat(result).isEqualTo(17);
+    }
 
+    @Test
+    @DisplayName("should Be Evaluated To Zero When Empty")
+    void evaluateEmptyPortfolio(){
+        final Portfolio portfolio = new Portfolio();
+        final double result = portfolio.evaluate(USD, Bank.withExchangeRate(EUR, EUR, 1.2));
 
+        assertThat(result).isEqualTo(0);
     }
 }
