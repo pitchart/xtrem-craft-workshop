@@ -29,3 +29,16 @@ Il y'a de nombreux problèmes dans le code :
 
 
 
+# Review 2
+
+## code sale
+
+- pas uniforme
+- pas conventioné
+- pas maintenable 
+- mal structuré
+
+## code propre
+
+- compéhensible sans commentaires
+- nom des fonctions et des variables courts, clairs et explicite
