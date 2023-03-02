@@ -22,12 +22,16 @@ public final class Bank {
     }
 
     public double convert(double amount, Currency currency1, Currency currency2) throws MissingExchangeRateException {
-        if (!(currency1 == currency2 || exchangeRates.containsKey(currency1 + "->" + currency2))) {
+        if (!isSameCurrency(currency1, currency2)) {
             throw new MissingExchangeRateException(currency1, currency2);
         }
         return currency1 == currency2
                 ? amount
                 : amount * exchangeRates.get(currency1 + "->" + currency2);
+    }
+
+    private boolean isSameCurrency(Currency currency1, Currency currency2) {
+        return (currency1 == currency2 || exchangeRates.containsKey(currency1 + "->" + currency2));
     }
 
 }
