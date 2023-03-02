@@ -31,11 +31,10 @@ public final class Bank {
     }
 
     private boolean isValidConvertion(Currency baseCurrency, Currency expectedCurrency) {
-        return ( isSameCurrency(baseCurrency, expectedCurrency) || exchangeRates.containsKey(baseCurrency + "->" + expectedCurrency));
+        return (isSameCurrency(baseCurrency, expectedCurrency) || exchangeRates.containsKey(baseCurrency + "->" + expectedCurrency));
     }
 
     private boolean isSameCurrency (Currency baseCurrency, Currency expectedCurrency) {
         return (baseCurrency == expectedCurrency);
     }
-
 }
