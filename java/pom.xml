@@ -25,7 +25,14 @@
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.11.3</version>
+                <version>1.10.3</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-junit5-plugin</artifactId>
+                        <version>1.1.1</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
