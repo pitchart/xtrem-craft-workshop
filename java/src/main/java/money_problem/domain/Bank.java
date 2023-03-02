@@ -10,15 +10,15 @@ public final class Bank {
         this.exchangeRates = exchangeRates;
     }
 
-    public static Bank withExchangeRate(Currency currency1, Currency currency2, double rate) {
+    public static Bank withExchangeRate(Currency baseCurrency, Currency expectedCurrency, double rate) {
         var bank = new Bank(new HashMap<>());
-        bank.addExchangeRate(currency1, currency2, rate);
+        bank.addExchangeRate(baseCurrency, expectedCurrency, rate);
 
         return bank;
     }
 
-    public void addExchangeRate(Currency currency1, Currency currency2, double rate) {
-        exchangeRates.put(currency1 + "->" + currency2, rate);
+    public void addExchangeRate(Currency baseCurrency, Currency expectedCurrency, double rate) {
+        exchangeRates.put(baseCurrency + "->" + expectedCurrency, rate);
     }
 
     public double convertFromTo(double amount, Currency baseCurrency, Currency expectedCurrency) throws MissingExchangeRateException {
@@ -34,8 +34,8 @@ public final class Bank {
         return ( isSameCurrency(baseCurrency, expectedCurrency) || exchangeRates.containsKey(baseCurrency + "->" + expectedCurrency));
     }
 
-    private boolean isSameCurrency (Currency currency1, Currency currency2) {
-        return (currency1 == currency2)
+    private boolean isSameCurrency (Currency baseCurrency, Currency expectedCurrency) {
+        return (baseCurrency == expectedCurrency);
     }
 
 }
