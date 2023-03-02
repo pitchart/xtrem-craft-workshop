@@ -1,0 +1,3 @@
+Le mutation testing permet de tester la qualité des tests en modifiant le code source
+pour vérifier que les tests soient assez précis pour empecher que les modifications du
+code source passent

@@ -366,7 +366,7 @@ target/
 
 # Stryker
 StrykerOutput
-*.stryker-temp
+*.stryker-tmp
 coverage/
 reports/
 

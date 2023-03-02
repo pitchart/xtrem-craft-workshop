@@ -1,0 +1,16 @@
+Qu'est ce que du code sale ?
+
+- Le manque de commentaire/documentation
+- Manque de clarté (définition de méthodes et variables pas clair)
+- Manque de segmentation
+- Duplication de code
+- Surcomplexité
+- Not invented here
+
+Code propre :
+
+- Lisible
+- Facilement modulable/modifiable
+- Sécurisé et sans bugs
+- Convention respecté
+- Concis ( pas de fonctions à rallonge, ne pas hésiter à diviser en sous fonctions si besoin)
