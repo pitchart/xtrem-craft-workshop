@@ -3,21 +3,21 @@ import { Bank } from '../src/Bank'
 import { MissingExchangeRateError } from '../src/MissingExchangeRateError'
 
 describe('Bank', function () {
-  const bank: Bank = new Bank()
+  let bank: Bank
   beforeEach(() => {
-    bank.AddExchangeRate(Currency.EUR, Currency.USD, 1.2)
+    bank = Bank.withExchangeRate(Currency.EUR, Currency.USD, 1.2)
   })
 
   test('convert from eur to usd returns number', () => {
     expect(bank.Convert(10, Currency.EUR, Currency.USD)).toBe(12)
   })
 
-  test('convert from usd to usd returns same value', () => {
+  test('convert from eur to eur returns same value', () => {
     expect(bank.Convert(10, Currency.EUR, Currency.EUR)).toBe(10)
   })
 
   test('convert throws error in case of missing exchange rates', () => {
-    expect(bank.Convert(10, Currency.EUR, Currency.USD)).toThrow(MissingExchangeRateError)
+    expect(() => { bank.Convert(10, Currency.EUR, Currency.KRW) }).toThrowError(MissingExchangeRateError).toThrowError('EUR-> KRW')
   })
 
   test('convert with different exchange rates returns different numbers', () => {
