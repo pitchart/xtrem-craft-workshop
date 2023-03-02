@@ -1,5 +1,5 @@
-import {Currency} from './Currency'
-import {MissingExchangeRateError} from './MissingExchangeRateError'
+import { Currency } from './Currency'
+import { MissingExchangeRateError } from './MissingExchangeRateError'
 
 export class Bank {
   private readonly _exchangeRates: Map<string, number> = new Map()
@@ -33,7 +33,7 @@ export class Bank {
     if (!(currency1 === currency2 || this._exchangeRates.has(currency1 + '->' + currency2))) { throw new MissingExchangeRateError(currency1, currency2) }
 
     return currency2 === currency1
-        ? amount
-        : amount * this._exchangeRates.get(currency1 + '->' + currency2)
+      ? amount
+      : amount * this._exchangeRates.get(currency1 + '->' + currency2)
   }
 }
