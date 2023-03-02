@@ -8,12 +8,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class BankTest {
 
-    final Bank bank = Bank.withExchangeRate(EUR, USD, 1.2);
     BankTest() throws MissingExchangeRateException {
     }
 
     @Test
-    void convertEurToUsd() {
+    void convertEurToUsd() throws MissingExchangeRateException {
+        final Bank bank = Bank.withExchangeRate(EUR, USD, 1.2);
         final double conversion = bank.convertFromTo(10, EUR, USD);
 
         assertThat(conversion).isEqualTo(12);
@@ -21,15 +21,16 @@ class BankTest {
 
 
     @Test
-    void convertEurToEur() {
+    void convertEurToEur() throws MissingExchangeRateException {
+        final Bank bank = Bank.withExchangeRate(EUR, USD, 1.2);
         final double conversion = bank.convertFromTo(10, EUR, USD);
         
         assertThat(conversion).isEqualTo(10);
     }
 
     @Test
-    void convertThrowsExceptionOnMissingExchangeRate() {
-
+    void convertThrowsExceptionOnMissingExchangeRate() throws MissingExchangeRateException {
+        final Bank bank = Bank.withExchangeRate(EUR, USD, 1.2);
         final double conversion = bank.convertFromTo(10, EUR, KRW);
         assertThatThrownBy(() -> conversion)
                 .isInstanceOf(MissingExchangeRateException.class)
@@ -38,6 +39,7 @@ class BankTest {
 
     @Test
     void convertWithDifferentExchangeRates() throws MissingExchangeRateException {
+        final Bank bank = Bank.withExchangeRate(EUR, USD, 1.2);
         final double conversion = bank.convertFromTo(10, EUR, USD);
 
         assertThat(conversion).isEqualTo(12);
