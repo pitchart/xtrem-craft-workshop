@@ -8,34 +8,43 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class BankTest {
 
-    Bank bank = Bank.withExchangeRate(EUR, USD, 1.2);
-    double conversion = bank.convertFromTo(10, EUR, USD);
-
+    final Bank bank = Bank.withExchangeRate(EUR, USD, 1.2);
     BankTest() throws MissingExchangeRateException {
     }
 
     @Test
-    void convert_eur_to_usd_returns_double() {
+    void convertEurToUsd() {
+        final double conversion = bank.convertFromTo(10, EUR, USD);
+
         assertThat(conversion).isEqualTo(12);
     }
 
+
     @Test
-    void convert_eur_to_eur_returns_same_value() {
+    void convertEurToEur() {
+        final double conversion = bank.convertFromTo(10, EUR, USD);
+        
         assertThat(conversion).isEqualTo(10);
     }
 
     @Test
-    void convert_throws_exception_on_missing_exchange_rate() {
-        assertThatThrownBy(() -> bank.convertFromTo(10, EUR, KRW))
+    void convertThrowsExceptionOnMissingExchangeRate() {
+
+        final double conversion = bank.convertFromTo(10, EUR, KRW);
+        assertThatThrownBy(() -> conversion)
                 .isInstanceOf(MissingExchangeRateException.class)
                 .hasMessage("EUR->KRW");
     }
 
     @Test
-    void convert_with_different_exchange_rates_returns_different_floats() throws MissingExchangeRateException {
+    void convertWithDifferentExchangeRates() throws MissingExchangeRateException {
+        final double conversion = bank.convertFromTo(10, EUR, USD);
+
         assertThat(conversion).isEqualTo(12);
 
-        assertThat(Bank.withExchangeRate(EUR, USD, 1.3).convertFromTo(10, EUR, USD))
-                .isEqualTo(13);
+        final Bank secondBank = Bank.withExchangeRate(EUR, USD, 1.2);
+        final double secondConversion = secondBank.convertFromTo(10, EUR, USD);
+
+        assertThat(secondConversion).isEqualTo(13);
     }
 }
