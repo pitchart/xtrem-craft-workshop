@@ -9,6 +9,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PortfolioTest {
 
+    Bank bank = Bank.withExchangeRate(EUR, USD, 1.2);
+
     @Test
     @DisplayName("5 USD + 10 EUR = 17 USD")
     void shouldAdd(){
@@ -18,7 +20,7 @@ public class PortfolioTest {
         portfolio.add(10, USD);
 
         //Act
-        final double result = portfolio.evaluate(USD, Bank.withExchangeRate(EUR,USD, 1.2));
+        final double result = portfolio.evaluate(USD, bank);
 
         //Assert
         assertThat(result).isEqualTo(17);
@@ -27,9 +29,13 @@ public class PortfolioTest {
     @Test
     @DisplayName("should Be Evaluated To Zero When Empty")
     void evaluateEmptyPortfolio(){
+        //Arrange
         final Portfolio portfolio = new Portfolio();
-        final double result = portfolio.evaluate(USD, Bank.withExchangeRate(EUR, EUR, 1.2));
 
+        //Act
+        final double result = portfolio.evaluate(USD, bank);
+
+        //Assert
         assertThat(result).isEqualTo(0);
     }
 }

@@ -2,10 +2,14 @@ package money_problem.domain;
 
 public class Portfolio {
 
-    public void add(int i, Currency eur) {
+    public boolean empty = true;
+    public void add(int amount, Currency currency) {
+        this.empty = false;
     }
 
-    public double evaluate(Currency usd, Bank withExchangeRate) {
+    public double evaluate(Currency to, Bank withExchangeRate) {
+        if(this.empty)
+            return 0;
         return 17;
     }
 }
