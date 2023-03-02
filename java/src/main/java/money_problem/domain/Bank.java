@@ -25,13 +25,17 @@ public final class Bank {
         if (!isValidConvertion(baseCurrency, expectedCurrency)) {
             throw new MissingExchangeRateException(baseCurrency, expectedCurrency);
         }
-        return baseCurrency == expectedCurrency
+        return  isSameCurrency(baseCurrency, expectedCurrency)
                 ? amount
                 : amount * exchangeRates.get(baseCurrency + "->" + expectedCurrency);
     }
 
     private boolean isValidConvertion(Currency baseCurrency, Currency expectedCurrency) {
-        return (baseCurrency == expectedCurrency || exchangeRates.containsKey(baseCurrency + "->" + expectedCurrency));
+        return ( isSameCurrency(baseCurrency, expectedCurrency) || exchangeRates.containsKey(baseCurrency + "->" + expectedCurrency));
+    }
+
+    private boolean isSameCurrency (Currency currency1, Currency currency2) {
+        return (currency1 == currency2)
     }
 
 }
