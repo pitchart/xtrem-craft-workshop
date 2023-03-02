@@ -1,5 +1,6 @@
 package money_problem.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static money_problem.domain.Currency.*;
@@ -10,6 +11,7 @@ class BankTest {
     final Bank bank = Bank.withExchangeRate(EUR, USD, 1.2);
 
     @Test
+    @DisplayName("10 EUR = 12 USD")
     void convertEurToUsd() throws MissingExchangeRateException {
         final double conversion = bank.convertFromTo(10, EUR, USD);
 
