@@ -1,5 +1,7 @@
 export enum Currency {
   EUR = 'EUR',
   USD = 'USD',
-  KRW = 'KRW'
+  KRW = 'KRW',
 }
+
+export default Currency;

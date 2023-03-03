@@ -1,71 +1,68 @@
-import { Bank } from "../src/Bank";
-import { Currency } from "../src/Currency";
+import Bank from '../src/Bank';
+import { Currency } from '../src/Currency';
 
 class Portfolio {
-    private count: {amount: number, currency: Currency}[] = [];
+  private count: { amount: number, currency: Currency }[] = [];
 
-    add(amount: number, currency: Currency):void {
-        this.count.push({amount: amount, currency: currency});
-    }
+  add(amount: number, currency: Currency):void {
+    this.count.push({ amount, currency });
+  }
 
-    evaluate(to: Currency, bank: Bank):number{
-        return this.count.reduce((acc:number, curr: {amount:number, currency: Currency}) => {
-            return acc + bank.Convert(curr.amount, curr.currency, to);
-        }, 0);
-    }
+  evaluate(to: Currency, bank: Bank):number {
+    return this.count.reduce((acc:number, curr: { amount:number, currency: Currency }) => acc + bank.Convert(curr.amount, curr.currency, to), 0);
+  }
 }
 
-describe('Portfolio', function () {
-    let bank: Bank = Bank.withExchangeRate(Currency.EUR, Currency.USD, 1.2);
-    
-    test('5 usd + 10 eur = 17us', () => {
-        //arrange
-        const portfolio = new Portfolio();
-        portfolio.add(5, Currency.USD);
-        portfolio.add(10, Currency.EUR);
+describe('Portfolio', () => {
+  const bank: Bank = Bank.withExchangeRate(Currency.EUR, Currency.USD, 1.2);
 
-        //act
-        let result = portfolio.evaluate(Currency.USD, bank)
+  test('5 usd + 10 eur = 17us', () => {
+    // arrange
+    const portfolio = new Portfolio();
+    portfolio.add(5, Currency.USD);
+    portfolio.add(10, Currency.EUR);
 
-        //assert
-        expect(result).toBe(17)
-    });
+    // act
+    const result = portfolio.evaluate(Currency.USD, bank);
 
-    it('should be evaluated to 0 when empty', () => {
-        //arrange
-        const portfolio = new Portfolio();
-        
-        //act
-        let result = portfolio.evaluate(Currency.USD, bank)
-        
-        //assert
-        expect(result).toBe(0);
-    });
+    // assert
+    expect(result).toBe(17);
+  });
 
-    it('should add 5 usd', ()=>{
-        //arrange
-        const portfolio = new Portfolio();
-        portfolio.add(5, Currency.USD);
+  it('should be evaluated to 0 when empty', () => {
+    // arrange
+    const portfolio = new Portfolio();
 
-        //act
-        let result = portfolio.evaluate(Currency.USD, bank)
+    // act
+    const result = portfolio.evaluate(Currency.USD, bank);
 
-        //assert
-        expect(result).toBe(5)
-    });
+    // assert
+    expect(result).toBe(0);
+  });
 
+  it('should add 5 usd', () => {
+    // arrange
+    const portfolio = new Portfolio();
+    portfolio.add(5, Currency.USD);
 
-    test('1 usd + 1100 krw = 2200 krw', ()=>{
-        //arrange
-        const portfolio = new Portfolio();
-        bank.AddExchangeRate(Currency.USD, Currency.KRW, 1100)
-        portfolio.add(1, Currency.USD);
-        portfolio.add(1100, Currency.KRW);
+    // act
+    const result = portfolio.evaluate(Currency.USD, bank);
 
-        //act
-        let result = portfolio.evaluate(Currency.KRW, bank)
+    // assert
+    expect(result).toBe(5);
+  });
 
-        //assert
-        expect(result).toBe(2200);
-    })
-})
+  test('1 usd + 1100 krw = 2200 krw', () => {
+    // arrange
+    const portfolio = new Portfolio();
+    bank.AddExchangeRate(Currency.USD, Currency.KRW, 1100);
+    portfolio.add(1, Currency.USD);
+    portfolio.add(1100, Currency.KRW);
+
+    // act
+    const result = portfolio.evaluate(Currency.KRW, bank);
+
+    // assert
+    expect(result).toBe(2200);
+  });
+});

@@ -42,3 +42,15 @@ Il y'a de nombreux problèmes dans le code :
 
 - compéhensible sans commentaires
 - nom des fonctions et des variables courts, clairs et explicite
+
+
+## Feedback
+
+### Appris
+- La création des tests en TDD
+
+### Surpris
+- La logique en TDD qui s'oppose drastiquement à notre méthode de développement actuel
+
+### Lundi
+- Mise en place des tests
