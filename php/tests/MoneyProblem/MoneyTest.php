@@ -3,8 +3,12 @@
 namespace Tests\MoneyProblem\Domain;
 
 use MoneyProblem\Domain\Currency;
+use MoneyProblem\Domain\Money;
+use http\Exception\InvalidArgumentException;
+
 use MoneyProblem\Domain\MoneyCalculator;
 use PHPUnit\Framework\TestCase;
+use Pitchart\Phlunit\Check;
 
 class MoneyTest extends TestCase
 {
@@ -42,5 +46,38 @@ class MoneyTest extends TestCase
         $this->assertEquals($divide2, 1000.5);
         $this->lessThan($divide, 3);
         $this->greaterThan($divide, 1);
+    }
+
+    public function test_multiply_euro_by_2() {
+        // Arrange
+        $money = new Money(10, Currency::EUR());
+
+        // Act
+        $multiplied = $money->times(2);
+
+        // Assert
+        $this->assertEquals($multiplied, new Money(20, Currency::EUR()));
+        $this->assertEquals($money, new Money(10, Currency::EUR()));
+    }
+    public function  test_add_euro_same_currency(){
+        // Arrange
+        $money = new Money(10, Currency::EUR());
+
+        // Act
+        $add = $money->add(new Money(10,Currency::EUR()));
+        // Assert
+        $this->assertEquals($add, new Money(20, Currency::EUR()));
+
+    }
+
+    public function test_divide_same_currency(){
+        $money = new Money(10, Currency::EUR());
+        $divide = $money->divide(2);
+        $this->assertEquals($divide, new Money(5, Currency::EUR()));
+    }
+
+    public function test_add_not_same_currency() {
+        $money = new Money(10, Currency::EUR());
+        Check::thatCall(fn () => $money->add(new Money(10, Currency::USD())))->throws(InvalidArgumentException::class);
     }
 }
