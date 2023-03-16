@@ -2,29 +2,26 @@
 
 namespace MoneyProblem\Domain;
 
+use function Pitchart\Transformer\transform;
+
 class Portfolio
 {
     public array $money;
 
-    public function add(float $amount, Currency $devise): void
+    public function add(Money $money): void
     {
-        if (isset($this->money[$devise->getValue()])) {
-            $this->money[$devise->getValue()] += $amount;
-        } else {
-            $this->money[$devise->getValue()] = $amount;
-        }
+        $this->money[] = $money;
+
     }
 
     /**
      * @throws MissingExchangeRateException
      */
-    public function evaluate(Currency $toDdevise, Bank $bank): float
+    public function evaluate(Currency $toDdevise, Bank $bank): Money
     {
-        $total = 0;
-        foreach ($this->money as $currency => $montant) {
-            $total += $bank->convertOld($montant, Currency::from($currency), $toDdevise);
-        }
+        return array_reduce($this->money, function (Money $result, Money $money) use ($bank, $toDdevise) {
+            return $result->add($bank->convert($money, $toDdevise));
 
-        return $total;
+        }, new Money(0, $toDdevise));
     }
 }
