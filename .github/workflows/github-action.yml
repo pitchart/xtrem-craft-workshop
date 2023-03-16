@@ -3,6 +3,19 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
   test:
+    runs-on: 
+    defaults:
+      run:
+        working-directory: typescript/
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install 
+      - name: Run Unit Tests
+        run: npm run test
+
+  stryker:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -12,5 +25,5 @@ jobs:
         uses: actions/checkout@v3
       - name: Install dependencies
         run: npm install 
-      - name: Run tests
-        run: npm run test
+      - name: Run Stryker
+        run: npm run mutation

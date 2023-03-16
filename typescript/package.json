@@ -8,7 +8,8 @@
     "tdd": "jest --watchAll",
     "coverage": "jest --collect-coverage",
     "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix"
+    "lint:fix": "eslint . --ext .ts --fix",
+    "mutation": "stryker run --logLevel trace"
   },
   "author": "",
   "license": "ISC",
