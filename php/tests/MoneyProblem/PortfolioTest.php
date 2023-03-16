@@ -55,6 +55,7 @@ class PortfolioTest extends TestCase
         $portfolio->addMoney(Currency::USD(), 5);
         $portfolio->addMoney(Currency::EUR(), 10);
         $sum = $portfolio->sum(Currency::USD());
+        
         $this->assertEquals(22, $sum);
     }
 }
