@@ -5,6 +5,8 @@ export class Money {
 	currency: Currency;
 
 	constructor(amount: number, currency: Currency) {
+		if (amount === null) throw new Error('Missing amount');
+		if (!currency) throw new Error('Missing currency');
 		if (amount < 0) throw new Error('Can not have a negative amount');
 		this.amount = amount;
 		this.currency = currency;
