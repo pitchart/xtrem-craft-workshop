@@ -14,7 +14,7 @@ export class Portfolio {
 
   evaluateToCurrency (bank: Bank, to: Currency): number {
     return Array.from(this._money.entries())
-      .reduce((total: number, [currency, amount]: [Currency, number]) => 
+      .reduce((total: number, [currency, amount]: [Currency, number]) =>
         total + bank.Convert(amount, currency, to), 0)
   }
 }
