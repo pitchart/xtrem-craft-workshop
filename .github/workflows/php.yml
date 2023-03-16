@@ -23,8 +23,10 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
     
-    - uses: php-actions/phpunit@v3
-
+    - name: PHPUnit tests 
+      uses: php-actions/phpunit@v3
+      with :
+        configuration: "./php/phpunit.xml.dist"
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
