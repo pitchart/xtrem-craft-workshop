@@ -18,7 +18,7 @@ class Money
     public function __construct(float $money, Currency $currency)
     {
         if ($money < 0) {
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
         }
         $this->money = $money;
         $this->currency = $currency;
@@ -62,7 +62,7 @@ class Money
     public function times(int $timesAmount): Money
     {
         if ($timesAmount < 0) {
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
         }
         return new Money($this->money * $timesAmount, $this->currency);
     }
@@ -70,7 +70,7 @@ class Money
     public function add(Money $moneyAdd): Money
     {
         if ($moneyAdd->currency != $this->currency) {
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
         }
         return new Money($this->money + $moneyAdd->money, $this->currency);
 
@@ -80,7 +80,7 @@ class Money
     public function divide(int $divideAmount): Money
     {
         if ($divideAmount === 0) {
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
         }
         return new Money($this->money / $divideAmount, $this->currency);
 

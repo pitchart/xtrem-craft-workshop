@@ -9,7 +9,8 @@
         "ext-iconv": "*",
         "myclabs/php-enum": "^1.8",
         "nesbot/carbon": "^2.64",
-        "pitchart/transformer": "^1.6"
+        "pitchart/transformer": "^1.6",
+        "ext-http": "*"
     },
     "require-dev": {
         "phpspec/prophecy": "*",
