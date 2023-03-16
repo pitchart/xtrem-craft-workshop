@@ -1,43 +1,32 @@
-import { Bank } from "./Bank";
-import { Currency } from "./Currency";
-
-
-interface Transaction {
-    currency: Currency,
-    amount: number
-}
+import { Bank } from './Bank';
+import { Currency } from './Currency';
+import { Money } from './Money';
 
 export class Portfolio {
+	private _moneys: Array<Money>;
 
-    private _transactions: Array<Transaction>;
+	constructor() {
+		this._moneys = [];
+	}
 
-    constructor() {
-        this._transactions = [];
-    }
+	add(money: Money): void {
+		if (money.amount === null) {
+			throw new Error('Missing amount');
+		}
+		if (!money.currency) {
+			throw new Error('Missing currency');
+		}
+		this._moneys.push(new Money(money.amount, money.currency));
+	}
 
-
-    add(amount: number, currency: Currency) {
-        if (amount === null) {
-            throw new Error("Missing amount")
-        }
-        if (!currency) {
-            throw new Error("Missing currency")
-        }
-        let t: Transaction = {
-            currency: currency,
-            amount: amount
-        }
-
-        this._transactions.push(t)
-    }
-
-    value(currency: Currency, bank: Bank): number {
-        return this._transactions.reduce(
-            (accumulator, currentValue) => accumulator + bank.Convert(currentValue.amount, currentValue.currency, currency),
-            0
-        );
-    }
-
-
-
+	value(currency: Currency, bank: Bank): Money {
+		return new Money(
+			this._moneys.reduce(
+				(accumulator, currentValue) =>
+					accumulator + bank.Convert(currentValue, currency).amount,
+				0
+			),
+			currency
+		);
+	}
 }
