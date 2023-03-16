@@ -1,10 +1,11 @@
 import { Currency } from './Currency';
 
 export class Money {
-	private amount: number;
-	private currency: Currency;
+	amount: number;
+	currency: Currency;
 
 	constructor(amount: number, currency: Currency) {
+		if (amount < 0) throw new Error('Can not have a negative amount');
 		this.amount = amount;
 		this.currency = currency;
 	}
@@ -26,12 +27,3 @@ export class Money {
 		return new Money(this.amount / time, this.currency);
 	}
 }
-
-export const MoneyCalculator = {
-	Add: (amount: number, currency: Currency, amount2: number): number =>
-		amount + amount2,
-	Times: (amount: number, currency: Currency, number: number): number =>
-		amount * number,
-	Divide: (amount: number, currency: Currency, value: number): number =>
-		amount / value,
-};
