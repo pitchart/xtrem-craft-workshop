@@ -374,3 +374,5 @@ reports/
 vendor/
 composer.phar
 composer.lock
+
+typescript/package-lock.json
