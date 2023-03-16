@@ -10,12 +10,6 @@ export class Portfolio {
 	}
 
 	add(money: Money): void {
-		if (money.amount === null) {
-			throw new Error('Missing amount');
-		}
-		if (!money.currency) {
-			throw new Error('Missing currency');
-		}
 		this._moneys.push(new Money(money.amount, money.currency));
 	}
 
