@@ -11,7 +11,6 @@ class Bank
     public function __construct(array $exchangeRates = [])
     {
         $this->exchangeRates = $exchangeRates;
-        // modif test
     }
     
     public static function create(Currency $from, Currency $to, float $rate) : Bank
