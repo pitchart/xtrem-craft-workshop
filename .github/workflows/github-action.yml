@@ -9,5 +9,6 @@ jobs:
         working-directory: typescript/
     steps:
       - run: |
+          ls -al
           npm install
           npm run test
