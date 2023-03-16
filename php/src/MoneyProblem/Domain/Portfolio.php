@@ -4,13 +4,27 @@ namespace MoneyProblem\Domain;
 
 class Portfolio
 {
+    public array $money;
 
     public function add(float $amount, Currency $devise): void
     {
+        if (isset($this->money[$devise->getValue()])) {
+            $this->money[$devise->getValue()] += $amount;
+        } else {
+            $this->money[$devise->getValue()] = $amount;
+        }
     }
 
-    public function evaluate(Currency $devise, Bank $bank): float
+    /**
+     * @throws MissingExchangeRateException
+     */
+    public function evaluate(Currency $toDdevise, Bank $bank): float
     {
-        return 17;
+        $total = 0;
+        foreach ($this->money as $currency => $montant) {
+            $total += $bank->convert($montant, Currency::from($currency), $toDdevise);
+        }
+
+        return $total;
     }
 }
