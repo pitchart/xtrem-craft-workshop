@@ -5,13 +5,28 @@ import { Portfolio } from "../src/Portfolio";
 describe('Portfolio', () => {
 
 
+    // | From | To   | Rate    |
+    // |------|------|---------|
+    // | EUR  | USD  | 1.2     |
+    // | USD  | EUR  | 0.82    |
+    // | USD  | KRW  | 1100    |
+    // | KRW  | EUR  | 0.0009  |
+    // | EUR  | KRW  | 1344    |
+    // | KRW  | EUR  | 0.00073 |
+
+
     let portfolio : Portfolio;
     let bank : Bank;
 
     beforeEach(() => {
         portfolio = new Portfolio()
         bank = Bank.withExchangeRate(Currency.EUR, Currency.USD, 1.2)
-        bank.AddExchangeRate(Currency.EUR, Currency.KRW, 10 )
+        bank.AddExchangeRate(Currency.USD, Currency.EUR, 0.82 )
+        bank.AddExchangeRate(Currency.USD, Currency.KRW, 1100 )
+        bank.AddExchangeRate(Currency.KRW, Currency.EUR, 0.0009 )
+        bank.AddExchangeRate(Currency.EUR, Currency.KRW, 1344 )
+        bank.AddExchangeRate(Currency.KRW, Currency.EUR, 0.00073 )
+
     })
 
 
