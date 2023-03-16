@@ -8,7 +8,6 @@ jobs:
       run:
         working-directory: typescript/
     steps:
-      - run: |
-          ls -al
-          npm install
-          npm run test
+      - run: ls -al
+      - run: npm install
+      - run: npm run test
