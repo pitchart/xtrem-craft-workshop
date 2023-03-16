@@ -1,0 +1,15 @@
+name: Continous integration
+run-name: ${{ github.actor }} is building app 🚀
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest*
+    steps:
+      - uses: actions/checkout@v2
+      - name: Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: cd typescript
+      - run: npm install
+      - run: npm run test 
