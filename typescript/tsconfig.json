@@ -5,6 +5,7 @@
     "target": "es2019",
     "esModuleInterop": true,
     "allowJs": false,
+    "sourceMap": true,
   },
   "files": [
     "node_modules/jest-extended/types/index.d.ts",
