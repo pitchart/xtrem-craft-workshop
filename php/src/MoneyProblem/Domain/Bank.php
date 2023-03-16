@@ -51,12 +51,13 @@ class Bank
      */
     public function convert(float $amount, Currency $fromDevise, Currency $toDevise): float
     {
+        $money = new Money($amount, $fromDevise);
         if ($this->isConvertNonValid($fromDevise, $toDevise)) {
             throw new MissingExchangeRateException($fromDevise, $toDevise);
         }
         return $fromDevise == $toDevise
-            ? $amount
-            : $amount * $this->exchangeRates[($this->getKey($fromDevise, $toDevise))];
+            ? $money->money
+            : $money->money * $this->exchangeRates[($this->getKey($fromDevise, $toDevise))];
     }
 
     private function isConvertNonValid(Currency $fromDevise, Currency $toDevise): bool
