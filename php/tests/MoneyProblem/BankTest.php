@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\MoneyProblem\Domain;
+namespace Tests\MoneyProblem;
 
 use MoneyProblem\Domain\Bank;
 use MoneyProblem\Domain\Currency;
