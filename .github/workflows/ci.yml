@@ -10,6 +10,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: cd typescript
-      - run: npm install
-      - run: npm run test 
+      - run: |
+          cd typescript
+          npm install
+      - run: |
+          cd typescript
+          npm run test
