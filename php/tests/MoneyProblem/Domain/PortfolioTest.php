@@ -58,4 +58,21 @@ class PortfolioTest extends TestCase
         $this->assertEquals(15, $total);
     }
 
+    public function test_evaluate_multiple_amount_in_usd() {
+
+        // Arrange
+        $portfolio = new Portfolio();
+
+        // Act
+        $portfolio->add(10, Currency::EUR());
+        $portfolio->add(5, Currency::USD());
+        $portfolio->add(5, Currency::USD());
+        $bank = Bank::create(Currency::EUR(), Currency::USD(), 1.2);
+
+        $total = $portfolio->evaluate(Currency::USD(), $bank);
+
+        // Assert
+        $this->assertEquals(22, $total);
+    }
+
 }
