@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./typescript
+        working-directory: typescript/
     steps:
       - run: |
           npm install
