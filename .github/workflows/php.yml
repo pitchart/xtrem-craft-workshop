@@ -24,7 +24,7 @@ jobs:
       run: composer install --prefer-dist --no-progress
     
     - name: PHPUnit tests 
-      uses: php-actions/phpunit@v3
+      uses: php-actions/phpunit@v9.6.3
       with :
         configuration: "./php/phpunit.xml.dist"
 
