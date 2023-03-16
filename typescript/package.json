@@ -9,7 +9,7 @@
     "coverage": "jest --collect-coverage",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
-    "mutation": "stryker run --logLevel trace"
+    "mutation": "stryker run --reporters clear-text"
   },
   "author": "",
   "license": "ISC",
