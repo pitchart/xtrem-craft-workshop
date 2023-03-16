@@ -8,6 +8,9 @@ jobs:
       run:
         working-directory: typescript/
     steps:
-      - run: ls -al
-      - run: npm install
-      - run: npm run test
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install 
+      - name: Run tests
+        run: npm run test
