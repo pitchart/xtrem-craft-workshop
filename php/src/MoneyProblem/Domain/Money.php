@@ -8,8 +8,8 @@ use function PHPUnit\Framework\throwException;
 
 class Money
 {
-    public float $money;
-    public Currency $currency;
+    private float $money;
+    private Currency $currency;
 
     /**
      * @param float $money
@@ -59,7 +59,7 @@ class Money
 
 
 
-    public function times(int $timesAmount): Money
+    public function times(float $timesAmount): Money
     {
         if ($timesAmount < 0) {
             throw new \InvalidArgumentException();
@@ -77,7 +77,7 @@ class Money
 
     }
 
-    public function divide(int $divideAmount): Money
+    public function divide(float $divideAmount): Money
     {
         if ($divideAmount === 0) {
             throw new \InvalidArgumentException();

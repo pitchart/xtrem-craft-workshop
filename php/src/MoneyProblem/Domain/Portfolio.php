@@ -22,7 +22,7 @@ class Portfolio
     {
         $total = 0;
         foreach ($this->money as $currency => $montant) {
-            $total += $bank->convert($montant, Currency::from($currency), $toDdevise);
+            $total += $bank->convertOld($montant, Currency::from($currency), $toDdevise);
         }
 
         return $total;
