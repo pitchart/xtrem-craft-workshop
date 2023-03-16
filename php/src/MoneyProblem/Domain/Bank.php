@@ -29,9 +29,8 @@ class Bank
     /**
      * @throws MissingExchangeRateException
      */
-    public function convert(float $amount, Currency $from, Currency $to): float
+    public function convertOld(float $amount, Currency $from, Currency $to): float
     {
-
         if($from == $to)
         {
             return $amount;
@@ -40,6 +39,21 @@ class Bank
             throw new MissingExchangeRateException($from, $to);
         }
         return $amount * $this->exchangeRates[$this->searchCurrency($from, $to)];;
+    }
+
+    /**
+     * @throws MissingExchangeRateException
+     */
+    public function convert(Money $money, Currency $to): float
+    {
+        if($money->getCurrency() == $to)
+        {
+            return $money->getAmount();
+        }
+        if (!$this->canConvert($money->getCurrency(),$to)) {
+            throw new MissingExchangeRateException($money->getCurrency(), $to);
+        }
+        return $money->getAmount() * $this->exchangeRates[$this->searchCurrency($money->getCurrency(), $to)];;
     }
 
     private function canConvert(Currency $from, Currency $to){
