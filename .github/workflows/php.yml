@@ -13,25 +13,17 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./php
 
     steps:
     - uses: actions/checkout@v3
       
     - name: Validate composer.json and composer.lock
-      working-directory: ./php
       run: composer validate
-  
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v3
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
 
     - name: Install dependencies
-      working-directory: ./php
       run: composer install --prefer-dist --no-progress
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
