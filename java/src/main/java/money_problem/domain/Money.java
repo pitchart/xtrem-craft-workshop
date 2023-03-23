@@ -28,4 +28,5 @@ public class Money {
         this.value = this.value / divide;
         return this.value;
     }
+
 }
