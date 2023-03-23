@@ -66,7 +66,7 @@ describe('Portfolio', () => {
     expect(result).toBe(2200);
   });
 
-  test('5 usd + 10€ = 14.1eur', () => {
+  test('5 usd + 10€ = 14.1€', () => {
     // arrange
     const portfolio = new Portfolio();
     bank.AddExchangeRate(Currency.USD, Currency.EUR, 0.82);
