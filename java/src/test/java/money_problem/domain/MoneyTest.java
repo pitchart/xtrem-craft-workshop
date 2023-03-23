@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static money_problem.domain.Currency.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoneyTest {
 
@@ -34,6 +35,16 @@ public class MoneyTest {
 
         assertThat(money.value).isEqualTo(5);
     }
+
+    @Test
+    @DisplayName("10 EUR - 15 EUR = Exception")
+    void shouldNotSubstract() throws Exception {
+        final Money money = new Money(10, EUR);
+
+        assertThatThrownBy(() -> money.minus(new Money(15, EUR)))
+                .isInstanceOf(Exception.class);
+    }
+
 
     @Test
     @DisplayName("4002 KRW / 4 = 1000.5 KRW")
