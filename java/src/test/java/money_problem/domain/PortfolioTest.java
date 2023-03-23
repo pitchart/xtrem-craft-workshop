@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PortfolioTest {
 
     Bank bank = Bank.withExchangeRate(EUR, USD, 1.2);
+    Bank bankKRW = Bank.withExchangeRate(USD, KRW, 1100);
 
     @Test
     @DisplayName("5 USD + 10 EUR = 17 USD")
@@ -35,7 +36,7 @@ public class PortfolioTest {
         portfolio.add(1100, KRW);
 
         //Act
-        final double result = portfolio.evaluate(KRW, bank);
+        final double result = portfolio.evaluate(KRW, bankKRW);
 
         //Assert
         assertThat(result).isEqualTo(2200);

@@ -7,10 +7,9 @@ import java.util.Map;
 public class Portfolio {
 
     public boolean empty = true;
-    public HashMap<Integer, Currency> count;
+    public HashMap<Integer, Currency> count = new HashMap<>();
     public void add(int amount, Currency currency) {
         this.empty = false;
-        count = new HashMap<>();
         this.count.put(amount, currency);
     }
 
