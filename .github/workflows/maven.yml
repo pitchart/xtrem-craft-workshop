@@ -10,9 +10,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "continuous-integration" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "continuous-integration" ]
+    branches: [ "master" ]
 defaults:
   run:
     working-directory: java
