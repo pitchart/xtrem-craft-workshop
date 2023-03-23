@@ -1,15 +1,15 @@
 package money_problem.domain;
 
 public class Money {
-    int value;
+    double value;
     Currency currency;
 
-    public Money(int value, Currency currency) {
+    public Money(double value, Currency currency) {
         this.value = value;
         this.currency = currency;
     }
 
-    public int add(Money money) throws Exception {
+    public double add(Money money) throws Exception {
         if (money.currency.equals(this.currency)) {
             this.value = this.value + money.value;
             return this.value;
@@ -18,7 +18,7 @@ public class Money {
         }
     }
 
-    public int minus(Money money) throws Exception {
+    public double minus(Money money) throws Exception {
         if (!money.currency.equals(this.currency)) {
             throw new Exception("Currency you tried to remove aren't the same");
         }
@@ -29,12 +29,12 @@ public class Money {
         return this.value;
     }
 
-    public int times(int times) {
+    public double times(double times) {
         this.value = this.value * times;
         return this.value;
     }
 
-    public int divide(int divide) {
+    public double divide(double divide) {
         this.value = this.value / divide;
         return this.value;
     }
