@@ -17,4 +17,7 @@ jobs:
           cd typescript
           npm install
           npm run test
+      - name: running stryker
+        run : |
+          stryker run
       - run: echo "🍏 This job's status is ${{ job.status }}."

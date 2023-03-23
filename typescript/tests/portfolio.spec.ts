@@ -95,7 +95,4 @@ describe('Portfolio', () => {
     expect(result).toBe(18940);
   });
 
-  test('shit test', () => {
-    expect(1).toBe(0);
-  });
 });
