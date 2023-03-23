@@ -27,10 +27,10 @@ public class PortfolioTest {
         portfolio.add(new Money(10, EUR));
 
         //Act
-        final double result = portfolio.evaluate(USD, bank);
+        final Money result = portfolio.evaluate(USD, bank);
 
         //Assert
-        assertThat(result).isEqualTo(17);
+        assertThat(result.value).isEqualTo(17);
     }
 
     @Test
@@ -42,10 +42,10 @@ public class PortfolioTest {
         portfolio.add(new Money(1100, KRW));
 
         //Act
-        final double result = portfolio.evaluate(KRW, bank);
+        final Money result = portfolio.evaluate(KRW, bank);
 
         //Assert
-        assertThat(result).isEqualTo(2200);
+        assertThat(result.value).isEqualTo(2200);
     }
 
     @Test
@@ -57,10 +57,10 @@ public class PortfolioTest {
         portfolio.add(new Money(10, EUR));
 
         //Act
-        final double result = portfolio.evaluate(KRW, bank);
+        final Money result = portfolio.evaluate(KRW, bank);
 
         //Assert
-        assertThat(result).isEqualTo(18940);
+        assertThat(result.value).isEqualTo(18940);
     }
 
     @Test
@@ -72,10 +72,10 @@ public class PortfolioTest {
         portfolio.add(new Money(10, EUR));
 
         //Act
-        final double result = portfolio.evaluate(EUR, bank);
+        final Money result = portfolio.evaluate(EUR, bank);
 
         //Assert
-        assertThat(result).isEqualTo(14);
+        assertThat(result.value).isEqualTo(14);
     }
 
     @Test
@@ -85,10 +85,10 @@ public class PortfolioTest {
         final Portfolio portfolio = new Portfolio();
 
         //Act
-        final double result = portfolio.evaluate(USD, bank);
+        final Money result = portfolio.evaluate(USD, bank);
 
         //Assert
-        assertThat(result).isEqualTo(0);
+        assertThat(result.value).isEqualTo(0);
     }
 
     @Test
@@ -99,9 +99,9 @@ public class PortfolioTest {
         portfolio.add(new Money(5,USD));
 
         //Act
-        final double result = portfolio.evaluate(USD, bank);
+        final Money result = portfolio.evaluate(USD, bank);
 
         //Assert
-        assertThat(result).isEqualTo(5);
+        assertThat(result.value).isEqualTo(5);
     }
 }

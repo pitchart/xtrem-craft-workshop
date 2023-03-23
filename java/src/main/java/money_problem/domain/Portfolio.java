@@ -17,13 +17,25 @@ public class Portfolio {
     public void add(Money money){
         this.countMoney.add(money);
     }
-
+    /*
     public double evaluate(Currency to, Bank withExchangeRate) {
         int result = 0;
         for (Money money : this.countMoney) {
             try {
-                result += withExchangeRate.convertFromTo(money.value, money.currency, to);
+                result += withExchangeRate.convertFromTo(money, to).value;
             } catch (MissingExchangeRateException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return result;
+    }
+     */
+    public Money evaluate(Currency to, Bank withExchangeRate){
+        Money result = new Money(0, to);
+        for (Money money : this.countMoney) {
+            try {
+                result.add(withExchangeRate.convertFromTo(money, to));
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
