@@ -23,8 +23,8 @@ public class PortfolioTest {
     void shouldAdd1() {
         //Arrange
         final Portfolio portfolio = new Portfolio();
-        portfolio.add(5,USD);
-        portfolio.add(10, EUR);
+        portfolio.add(new Money(5, USD));
+        portfolio.add(new Money(10, EUR));
 
         //Act
         final double result = portfolio.evaluate(USD, bank);
@@ -38,8 +38,8 @@ public class PortfolioTest {
     void shouldAdd2() {
         //Arrange
         final Portfolio portfolio = new Portfolio();
-        portfolio.add(1, USD);
-        portfolio.add(1100, KRW);
+        portfolio.add(new Money(1, USD));
+        portfolio.add(new Money(1100, KRW));
 
         //Act
         final double result = portfolio.evaluate(KRW, bank);
@@ -53,8 +53,8 @@ public class PortfolioTest {
     void shouldAdd3() {
         //Arrange
         final Portfolio portfolio = new Portfolio();
-        portfolio.add(5,USD);
-        portfolio.add(10, EUR);
+        portfolio.add(new Money(5, USD));
+        portfolio.add(new Money(10, EUR));
 
         //Act
         final double result = portfolio.evaluate(KRW, bank);
@@ -68,8 +68,8 @@ public class PortfolioTest {
     void shouldAdd4() {
         //Arrange
         final Portfolio portfolio = new Portfolio();
-        portfolio.add(5,USD);
-        portfolio.add(10, EUR);
+        portfolio.add(new Money(5, USD));
+        portfolio.add(new Money(10, EUR));
 
         //Act
         final double result = portfolio.evaluate(EUR, bank);
@@ -96,7 +96,7 @@ public class PortfolioTest {
     void portfolioEqualsPortfolio() {
         //Arrange
         final Portfolio portfolio = new Portfolio();
-        portfolio.add(5, USD);
+        portfolio.add(new Money(5,USD));
 
         //Act
         final double result = portfolio.evaluate(USD, bank);
