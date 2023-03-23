@@ -8,11 +8,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MoneyTest {
 
-    static Bank bank = Bank.withExchangeRate(EUR, USD, 1.2);
-    
     @Test
     @DisplayName("5 USD + 10 USD = 15 USD")
-    void shouldAdd1() throws Exception {
+    void shoudAdd() throws Exception {
         final Money money = new Money(5, USD);
         money.add(new Money(10, USD));
 
@@ -21,7 +19,7 @@ public class MoneyTest {
 
     @Test
     @DisplayName("10 EUR * 2 = 20 EUR")
-    void shouldAdd2() throws Exception {
+    void shouldDevide() throws Exception {
         final Money money = new Money(10, EUR);
         money.times(2);
 
@@ -30,7 +28,7 @@ public class MoneyTest {
 
     @Test
     @DisplayName("4002 KRW / 4 = 1000.5 KRW")
-    void shouldAdd3() throws Exception {
+    void shouldDivide() throws Exception {
         final Money money = new Money(4002, KRW);
         money.divide(4);
 
