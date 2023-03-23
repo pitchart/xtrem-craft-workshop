@@ -1,5 +1,6 @@
 package money_problem.domain;
 import jdk.jfr.Description;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,8 +10,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PortfolioTest {
 
-    Bank bank = Bank.withExchangeRate(EUR, USD, 1.2);
+    static Bank bank = Bank.withExchangeRate(EUR, USD, 1.2);
 
+    @BeforeAll
+    public static void setChanges(){
+        bank.addExchangeRate(USD, KRW, 1100);
+        bank.addExchangeRate(EUR, KRW, 1344);
+    }
     @Test
     @DisplayName("5 USD + 10 EUR = 17 USD")
     void shouldAdd1() {
@@ -29,7 +35,6 @@ public class PortfolioTest {
     @Test
     @DisplayName("1 USD + 1100KRW = 2200KRW")
     void shouldAdd2() {
-        bank.addExchangeRate(USD, KRW, 1100);
         //Arrange
         final Portfolio portfolio = new Portfolio();
         portfolio.add(1,USD);
@@ -40,6 +45,21 @@ public class PortfolioTest {
 
         //Assert
         assertThat(result).isEqualTo(2200);
+    }
+
+    @Test
+    @DisplayName("5 USD + 10 EUR = 18940 KWN")
+    void shouldAdd3() {
+        //Arrange
+        final Portfolio portfolio = new Portfolio();
+        portfolio.add(5,USD);
+        portfolio.add(10, EUR);
+
+        //Act
+        final double result = portfolio.evaluate(KRW, bank);
+
+        //Assert
+        assertThat(result).isEqualTo(18940);
     }
 
     @Test
