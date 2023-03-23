@@ -5,14 +5,24 @@ import java.util.ArrayList;
 public class Portfolio {
 
     public boolean empty = true;
-    public ArrayList<Money> countMoney = new ArrayList<>();
+    public ArrayList<Money> countMoney;
 
-    public void add(Money money){
+    private Portfolio(ArrayList<Money> countMoney) {
         this.empty = false;
-        this.countMoney.add(money);
+        this.countMoney = countMoney;
     }
 
-    public Money evaluate(Currency to, Bank withExchangeRate){
+    public Portfolio() {
+        this.countMoney = new ArrayList<>();
+    }
+
+    public Portfolio add(Money money) {
+        ArrayList<Money> temp = new ArrayList<>(countMoney);
+        temp.add(money);
+        return new Portfolio(temp);
+    }
+
+    public Money evaluate(Currency to, Bank withExchangeRate) {
         Money result = new Money(0, to);
         for (Money money : this.countMoney) {
 

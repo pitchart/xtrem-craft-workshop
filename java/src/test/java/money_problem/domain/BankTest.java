@@ -38,7 +38,7 @@ class BankTest {
         assertThat(bank.convertFromTo(new Money(10, EUR), USD).value)
                 .isEqualTo(new Money(12, USD).value);
 
-        Bank newBank = bank.addExchangeRate(EUR, USD, 1.3);
+        final Bank newBank = bank.addExchangeRate(EUR, USD, 1.3);
 
         assertThat(newBank.convertFromTo(new Money(10, EUR), USD).value)
                 .isEqualTo(new Money(13, USD).value);

@@ -13,21 +13,22 @@ public class PortfolioTest {
     static Bank bank = Bank.withExchangeRate(EUR, USD, 1.2);
 
     @BeforeAll
-    public static void setChanges(){
+    public static void setChanges() {
         bank.addExchangeRate(USD, KRW, 1100);
         bank.addExchangeRate(EUR, KRW, 1344);
         bank.addExchangeRate(USD, EUR, 0.82);
     }
+
     @Test
     @DisplayName("5 USD + 10 EUR = 17 USD")
     void shouldAdd1() {
         //Arrange
         final Portfolio portfolio = new Portfolio();
-        portfolio.add(new Money(5, USD));
-        portfolio.add(new Money(10, EUR));
+        final Portfolio newPortfolio = portfolio.add(new Money(5, USD));
+        final Portfolio newPortfolio2 = newPortfolio.add(new Money(10, EUR));
 
         //Act
-        final Money result = portfolio.evaluate(USD, bank);
+        final Money result = newPortfolio2.evaluate(USD, bank);
 
         //Assert
         assertThat(result.value).isEqualTo(17);
@@ -38,11 +39,11 @@ public class PortfolioTest {
     void shouldAdd2() {
         //Arrange
         final Portfolio portfolio = new Portfolio();
-        portfolio.add(new Money(1, USD));
-        portfolio.add(new Money(1100, KRW));
+        final Portfolio newPortfolio = portfolio.add(new Money(1, USD));
+        final Portfolio newPortfolio2 = newPortfolio.add(new Money(1100, KRW));
 
         //Act
-        final Money result = portfolio.evaluate(KRW, bank);
+        final Money result = newPortfolio2.evaluate(KRW, bank);
 
         //Assert
         assertThat(result.value).isEqualTo(2200);
@@ -53,11 +54,11 @@ public class PortfolioTest {
     void shouldAdd3() {
         //Arrange
         final Portfolio portfolio = new Portfolio();
-        portfolio.add(new Money(5, USD));
-        portfolio.add(new Money(10, EUR));
+        final Portfolio newPortfolio = portfolio.add(new Money(5, USD));
+        final Portfolio newPortfolio2 = newPortfolio.add(new Money(10, EUR));
 
         //Act
-        final Money result = portfolio.evaluate(KRW, bank);
+        final Money result = newPortfolio2.evaluate(KRW, bank);
 
         //Assert
         assertThat(result.value).isEqualTo(18940);
@@ -68,11 +69,11 @@ public class PortfolioTest {
     void shouldAdd4() {
         //Arrange
         final Portfolio portfolio = new Portfolio();
-        portfolio.add(new Money(5, USD));
-        portfolio.add(new Money(10, EUR));
+        final Portfolio newPortfolio = portfolio.add(new Money(5, USD));
+        final Portfolio newPortfolio2 = newPortfolio.add(new Money(10, EUR));
 
         //Act
-        final Money result = portfolio.evaluate(EUR, bank);
+        final Money result = newPortfolio2.evaluate(EUR, bank);
 
         //Assert
         assertThat(result.value).isEqualTo(14.1);
@@ -96,10 +97,10 @@ public class PortfolioTest {
     void portfolioEqualsPortfolio() {
         //Arrange
         final Portfolio portfolio = new Portfolio();
-        portfolio.add(new Money(5,USD));
+        final Portfolio newPortfolio = portfolio.add(new Money(5, USD));
 
         //Act
-        final Money result = portfolio.evaluate(USD, bank);
+        final Money result = newPortfolio.evaluate(USD, bank);
 
         //Assert
         assertThat(result.value).isEqualTo(5);
