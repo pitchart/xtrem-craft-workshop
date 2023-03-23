@@ -27,4 +27,13 @@ public class MoneyTest {
 
         assertThat(money.value).isEqualTo(20);
     }
+
+    @Test
+    @DisplayName("4002 KRW / 4 = 1000.5 KRW")
+    void shouldAdd3() throws Exception {
+        final Money money = new Money(4002, KRW);
+        money.divide(4);
+
+        assertThat(money.value).isEqualTo(1000.5);
+    }
 }
