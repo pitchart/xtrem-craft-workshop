@@ -13,12 +13,13 @@ public final class Bank {
     public static Bank withExchangeRate(Currency baseCurrency, Currency expectedCurrency, double rate) {
         var bank = new Bank(new HashMap<>());
         bank.addExchangeRate(baseCurrency, expectedCurrency, rate);
-
         return bank;
     }
 
-    public void addExchangeRate(Currency baseCurrency, Currency expectedCurrency, double rate) {
-        exchangeRates.put(baseCurrency + "->" + expectedCurrency, rate);
+    public Bank addExchangeRate(Currency baseCurrency, Currency expectedCurrency, double rate) {
+        Map<String, Double> tmp = this.exchangeRates;
+        tmp.put(baseCurrency + "->" + expectedCurrency, rate);
+        return new Bank(tmp);
     }
 
     public Money convertFromTo(Money money, Currency expectedCurrency) throws MissingExchangeRateException {
