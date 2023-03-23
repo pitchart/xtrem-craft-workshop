@@ -16,7 +16,7 @@ public class PortfolioTest {
     public static void setChanges(){
         bank.addExchangeRate(USD, KRW, 1100);
         bank.addExchangeRate(EUR, KRW, 1344);
-        bank.addExchangeRate(USD, EUR, 0.94);
+        bank.addExchangeRate(USD, EUR, 0.82);
     }
     @Test
     @DisplayName("5 USD + 10 EUR = 17 USD")
@@ -75,7 +75,7 @@ public class PortfolioTest {
         final Money result = portfolio.evaluate(EUR, bank);
 
         //Assert
-        assertThat(result.value).isEqualTo(14);
+        assertThat(result.value).isEqualTo(14.1);
     }
 
     @Test

@@ -31,7 +31,8 @@ public final class Bank {
         }
         return  isSameCurrency(money.currency, expectedCurrency)
                 ? money
-                : money.times(exchangeRates.get(money.currency + "->" + expectedCurrency));
+                : new Money(money.times(exchangeRates.get(money.currency + "->" + expectedCurrency)).value, expectedCurrency);
+                //money.times(exchangeRates.get(money.currency + "->" + expectedCurrency));
     }
 
     private boolean isValidConvertion(Currency baseCurrency, Currency expectedCurrency) {

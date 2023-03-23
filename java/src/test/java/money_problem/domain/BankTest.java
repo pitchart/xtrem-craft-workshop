@@ -28,7 +28,6 @@ class BankTest {
 
     @Test
     void convertThrowsExceptionOnMissingExchangeRate() {
-
         assertThatThrownBy(() -> bank.convertFromTo(new Money(10, EUR), KRW))
                 .isInstanceOf(MissingExchangeRateException.class);
         //.hasMessage("EUR->KRW");

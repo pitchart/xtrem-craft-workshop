@@ -1,9 +1,6 @@
 package money_problem.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Portfolio {
 
@@ -33,6 +30,7 @@ public class Portfolio {
     public Money evaluate(Currency to, Bank withExchangeRate){
         Money result = new Money(0, to);
         for (Money money : this.countMoney) {
+
             try {
                 result.add(withExchangeRate.convertFromTo(money, to));
             } catch (Exception e) {
