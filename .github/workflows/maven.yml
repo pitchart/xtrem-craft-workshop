@@ -13,7 +13,9 @@ on:
     branches: [ "continuous-integration" ]
   pull_request:
     branches: [ "continuous-integration" ]
-
+defaults:
+  run:
+    working-directory: java
 jobs:
   build:
 
