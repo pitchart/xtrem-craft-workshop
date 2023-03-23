@@ -1,5 +1,5 @@
 import { Currency } from '../src/Currency';
-import { MoneyCalculator } from '../src/MoneyCalculator';
+import MoneyCalculator from '../src/MoneyCalculator';
 
 describe('Money', () => {
   test('add in usd returns number', () => {
