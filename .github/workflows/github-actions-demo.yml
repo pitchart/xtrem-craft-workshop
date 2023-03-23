@@ -15,5 +15,6 @@ jobs:
       - name: running tests
         run: |
           cd typescript
+          npm install
           npm run test
       - run: echo "🍏 This job's status is ${{ job.status }}."
