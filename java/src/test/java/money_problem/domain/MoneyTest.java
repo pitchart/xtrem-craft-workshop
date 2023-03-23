@@ -27,6 +27,15 @@ public class MoneyTest {
     }
 
     @Test
+    @DisplayName("10 EUR - 5 EUR = 5 EUR")
+    void shouldSubstract() throws Exception {
+        final Money money = new Money(10, EUR);
+        money.minus(new Money(5, EUR));
+
+        assertThat(money.value).isEqualTo(5);
+    }
+
+    @Test
     @DisplayName("4002 KRW / 4 = 1000.5 KRW")
     void shouldDivide() throws Exception {
         final Money money = new Money(4002, KRW);

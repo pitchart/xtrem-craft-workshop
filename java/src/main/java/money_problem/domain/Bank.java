@@ -21,10 +21,6 @@ public final class Bank {
         exchangeRates.put(baseCurrency + "->" + expectedCurrency, rate);
     }
 
-    public double convertFromTo(double amount, Currency baseCurrency, Currency expectedCurrency) throws MissingExchangeRateException {
-        return convertFromTo(new Money(amount, baseCurrency), expectedCurrency).value;
-    }
-
     public Money convertFromTo(Money money, Currency expectedCurrency) throws MissingExchangeRateException {
         if (!isValidConvertion(money.currency, expectedCurrency)) {
             throw new MissingExchangeRateException(money.currency, expectedCurrency);

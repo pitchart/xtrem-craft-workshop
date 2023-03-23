@@ -18,7 +18,7 @@ public class Money {
         }
     }
 
-    public double minus(Money money) throws Exception {
+    public Money minus(Money money) throws Exception {
         if (!money.currency.equals(this.currency)) {
             throw new Exception("Currency you tried to remove aren't the same");
         }
@@ -26,7 +26,7 @@ public class Money {
             throw new Exception("The amout you tried to remove is too high");
         }
         this.value = this.value - money.value;
-        return this.value;
+        return this;
     }
 
     public Money times(double times) {
