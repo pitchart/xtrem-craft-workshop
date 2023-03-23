@@ -13,36 +13,36 @@ class BankTest {
     @Test
     @DisplayName("10 EUR = 12 USD")
     void convertEurToUsd() throws MissingExchangeRateException {
-        final double conversion = bank.convertFromTo(10, EUR, USD);
+        final Money conversion = bank.convertFromTo(new Money(10.0, EUR), USD);
 
-        assertThat(conversion).isEqualTo(12);
+        assertThat(conversion.value).isEqualTo(new Money(12, USD).value);
     }
 
 
     @Test
     void convertEurToEur() throws MissingExchangeRateException {
-        final double conversion = bank.convertFromTo(10, EUR, EUR);
+        final Money conversion = bank.convertFromTo(new Money(10, EUR), EUR);
 
-        assertThat(conversion).isEqualTo(10);
+        assertThat(conversion.value).isEqualTo(new Money(10, EUR).value);
     }
 
     @Test
     void convertThrowsExceptionOnMissingExchangeRate() {
 
-        assertThatThrownBy(() -> bank.convertFromTo(10, EUR, KRW))
+        assertThatThrownBy(() -> bank.convertFromTo(new Money(10, EUR), KRW))
                 .isInstanceOf(MissingExchangeRateException.class);
-                //.hasMessage("EUR->KRW");
+        //.hasMessage("EUR->KRW");
     }
 
     @Test
     void convertWithDifferentExchangeRates() throws MissingExchangeRateException {
-        assertThat(bank.convertFromTo(10, EUR, USD))
-                .isEqualTo(12);
+        assertThat(bank.convertFromTo(new Money(10, EUR), USD).value)
+                .isEqualTo(new Money(12, USD).value);
 
         bank.addExchangeRate(EUR, USD, 1.3);
 
-        assertThat(bank.convertFromTo(10, EUR, USD))
-                .isEqualTo(13);
+        assertThat(bank.convertFromTo(new Money(10, EUR), USD).value)
+                .isEqualTo(new Money(13, USD).value);
     }
 
 
