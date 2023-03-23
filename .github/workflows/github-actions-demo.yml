@@ -19,5 +19,6 @@ jobs:
           npm run test
       - name: running stryker
         run : |
+          npm install -g stryker-cli
           stryker run
       - run: echo "🍏 This job's status is ${{ job.status }}."
