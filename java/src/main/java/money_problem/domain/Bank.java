@@ -22,12 +22,16 @@ public final class Bank {
     }
 
     public double convertFromTo(double amount, Currency baseCurrency, Currency expectedCurrency) throws MissingExchangeRateException {
-        if (!isValidConvertion(baseCurrency, expectedCurrency)) {
-            throw new MissingExchangeRateException(baseCurrency, expectedCurrency);
+        return convertFromTo(new Money(amount, baseCurrency), expectedCurrency).value;
+    }
+
+    public Money convertFromTo(Money money, Currency expectedCurrency) throws MissingExchangeRateException {
+        if (!isValidConvertion(money.currency, expectedCurrency)) {
+            throw new MissingExchangeRateException(money.currency, expectedCurrency);
         }
-        return  isSameCurrency(baseCurrency, expectedCurrency)
-                ? amount
-                : amount * exchangeRates.get(baseCurrency + "->" + expectedCurrency);
+        return  isSameCurrency(money.currency, expectedCurrency)
+                ? money
+                : money.times(exchangeRates.get(money.currency + "->" + expectedCurrency));
     }
 
     private boolean isValidConvertion(Currency baseCurrency, Currency expectedCurrency) {

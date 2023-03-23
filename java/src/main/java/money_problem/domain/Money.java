@@ -29,14 +29,14 @@ public class Money {
         return this.value;
     }
 
-    public double times(double times) {
+    public Money times(double times) {
         this.value = this.value * times;
-        return this.value;
+        return this;
     }
 
-    public double divide(double divide) {
+    public Money divide(double divide) {
         this.value = this.value / divide;
-        return this.value;
+        return this;
     }
 
 }
