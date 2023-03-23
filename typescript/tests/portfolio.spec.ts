@@ -65,4 +65,19 @@ describe('Portfolio', () => {
     // assert
     expect(result).toBe(2200);
   });
+
+  test('5 usd + 10€ = 18940 krw', () => {
+    // arrange
+    const portfolio = new Portfolio();
+    bank.AddExchangeRate(Currency.USD, Currency.KRW, 1100);
+    bank.AddExchangeRate(Currency.EUR, Currency.KRW, 1344);
+    portfolio.add(5, Currency.USD);
+    portfolio.add(10, Currency.EUR);
+
+    // act
+    const result = portfolio.evaluate(Currency.KRW, bank);
+
+    // assert
+    expect(result).toBe(18940);
+  });
 });
