@@ -23,9 +23,9 @@ public class Portfolio {
 
     public double evaluate(Currency to, Bank withExchangeRate) {
         int result = 0;
-        for (Map.Entry<Integer, Currency> count : this.count.entrySet()) {
+        for (Money money : this.countMoney) {
             try {
-                result += withExchangeRate.convertFromTo((int)count.getKey(), (Currency)count.getValue(), to);
+                result += withExchangeRate.convertFromTo(money.value, money.currency, to);
             } catch (MissingExchangeRateException e) {
                 throw new RuntimeException(e);
             }
