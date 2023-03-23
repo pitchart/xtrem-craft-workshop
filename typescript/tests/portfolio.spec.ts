@@ -4,12 +4,12 @@ import { Currency } from '../src/Currency';
 class Portfolio {
   private count: { amount: number, currency: Currency }[] = [];
 
-  add(amount: number, currency: Currency):void {
+  add(amount: number, currency: Currency): void {
     this.count.push({ amount, currency });
   }
 
-  evaluate(to: Currency, bank: Bank):number {
-    return this.count.reduce((acc:number, curr: { amount:number, currency: Currency }) => acc + bank.Convert(curr.amount, curr.currency, to), 0);
+  evaluate(to: Currency, bank: Bank): number {
+    return this.count.reduce((acc: number, curr: { amount: number, currency: Currency }) => acc + bank.Convert(curr.amount, curr.currency, to), 0);
   }
 }
 
@@ -93,5 +93,9 @@ describe('Portfolio', () => {
 
     // assert
     expect(result).toBe(18940);
+  });
+
+  test('shit test', () => {
+    expect(1).toBe(0);
   });
 });
