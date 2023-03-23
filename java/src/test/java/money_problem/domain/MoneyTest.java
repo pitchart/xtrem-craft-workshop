@@ -10,13 +10,21 @@ public class MoneyTest {
 
     static Bank bank = Bank.withExchangeRate(EUR, USD, 1.2);
     
-
     @Test
-    @DisplayName("5 EUR + 10 EUR = 15 EUR")
+    @DisplayName("5 USD + 10 USD = 15 USD")
     void shouldAdd1() throws Exception {
-        final Money money = new Money(5, EUR);
-        money.add(new Money(10, EUR));
+        final Money money = new Money(5, USD);
+        money.add(new Money(10, USD));
 
         assertThat(money.value).isEqualTo(15);
+    }
+
+    @Test
+    @DisplayName("10 EUR * 2 = 20 EUR")
+    void shouldAdd2() throws Exception {
+        final Money money = new Money(10, EUR);
+        money.times(2);
+
+        assertThat(money.value).isEqualTo(20);
     }
 }
