@@ -12,18 +12,24 @@ class Bank
     {
         $this->exchangeRates = $exchangeRates;
     }
+
+    private function setExchangeRates(array $exchangeRates) {
+        $this->exchangeRates = $exchangeRates;
+    }
     
     public static function create(Currency $from, Currency $to, float $rate) : Bank
     {
         $bank = new Bank([]);
         $bank->addEchangeRate($from, $to, $rate);
-
         return $bank;
     }
 
-    public function addEchangeRate(Currency $from, Currency $to, float $rate): void
+    public function addEchangeRate(Currency $from, Currency $to, float $rate): Bank
     {
         $this->exchangeRates[$this->searchCurrency($from, $to)] = $rate;
+        $newBank = new Bank();
+        $newBank->setExchangeRates($this->exchangeRates);
+        return $newBank;
     }
 
     /**
@@ -46,6 +52,6 @@ class Bank
     }
 
     private function searchCurrency(Currency $from, Currency $to) { 
-        return ($from . '->' . $to);
+        return $from . '->' . $to;
     }
 }

@@ -28,7 +28,4 @@ class Money {
     public function getCurrency():Currency{
         return $this->currency;
     }
-    public function setCurrency(Currency $currency){
-        $this->currency=$currency;
-    }
 }

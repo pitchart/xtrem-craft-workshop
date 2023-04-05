@@ -36,14 +36,6 @@ class Portfolio {
         }
     }
 
-    public function sumOld(Currency $currency){
-        $sum = 0;
-        foreach ($this->wallet as $walletCurrency => $amount) {
-            $sum += $this->bank->convert($amount,Currency::from($walletCurrency), $currency);
-        }
-        return $sum;
-    }
-
     public function sum(Currency $currency){
         $sum = 0;
         foreach ($this->wallet as $money) {
@@ -53,7 +45,6 @@ class Portfolio {
     }
 
     public function getAmountByCurrency(Currency $currency){
-
         $find = false;
         $index = 0;
         $amount = 0;

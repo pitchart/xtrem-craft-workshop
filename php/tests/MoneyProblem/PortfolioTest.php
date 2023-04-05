@@ -35,7 +35,7 @@ class PortfolioTest extends TestCase
 
     public function test_convert_potfolio() {
         $bank = Bank::create(Currency::EUR(), Currency::KRW(), 1344);
-        $bank->addEchangeRate(Currency::USD(), Currency::KRW(), 1100);
+        $bank = $bank->addEchangeRate(Currency::USD(), Currency::KRW(), 1100);
         $portfolio = new Portfolio($bank);
         $money = new Money(5,Currency::USD());
         $money2 = new Money(10,Currency::EUR()); 

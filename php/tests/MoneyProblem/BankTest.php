@@ -10,8 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 class BankTest extends TestCase
 {
-    // Nouveau test
-
     public function test_convert_different_currency()
     {
         // arrange 
@@ -47,7 +45,7 @@ class BankTest extends TestCase
     public function test_convert_with_different_exchange_rates()
     {
         $bank = Bank::create(Currency::EUR(), Currency::USD(), 1.2);        
-        $bank->addEchangeRate(Currency::EUR(), Currency::USD(), 1.3);
+        $bank = $bank->addEchangeRate(Currency::EUR(), Currency::USD(), 1.3);
         $moneyFrom = new Money(10, Currency::EUR());
         $value = $bank->convert($moneyFrom, Currency::USD());
         $this->assertEquals(13, $value);
