@@ -13,27 +13,31 @@ class Portfolio {
         $this->wallet = [];
     }
 
-    public function addMoney( Money $money){
+    public function addMoney(Money $money){
+        $newPortfolio = new Portfolio($this->getBank());
+        $isFinish = false;
         if(empty($this->wallet)){
             array_push($this->wallet,$money);
-            return ;
+            $isFinish = true;
         }
         $currency = $money->getCurrency()->getValue();
         $find = false;
         $index = 0;
-        while(!$find && $index < count($this->wallet)){
+        while(!$isFinish && !$find && $index < count($this->wallet)){
             if($this->wallet[$index]->getCurrency()->getValue() == $currency){
                 $find = true;
+                $isFinish = true;
                 $newAmount = $this->wallet[$index]->getAmount() + $money->getAmount();
                 $this->wallet[$index]->setAmount($newAmount);
-                return ;
             }
             $index++;
         }
-        if(!$find){
+        if(!$find && !$isFinish){
             array_push($this->wallet,$money);
-            return ;
         }
+        
+        $newPortfolio->setWallet($this->getWallet());
+        return $newPortfolio;
     }
 
     public function sum(Currency $currency){
@@ -56,5 +60,21 @@ class Portfolio {
             $index++;
         }
         return $amount;
+    }
+
+    private function setBank(Bank $bank) : void {
+        $this->bank = $bank;
+    }
+
+    protected function getBank() : Bank {
+        return $this->bank;
+    }
+
+    private function setWallet(array $wallet) : void {
+        $this->wallet = $wallet;
+    }
+
+    protected function getWallet() : array {
+        return $this->wallet;
     }
 }
