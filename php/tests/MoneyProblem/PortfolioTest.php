@@ -6,11 +6,13 @@ use MoneyProblem\Domain\Currency;
 use MoneyProblem\Domain\Money;
 use MoneyProblem\Domain\Portfolio;
 use PHPUnit\Framework\TestCase;
+use Tests\MoneyProblem\BankBuilder;
 
 class PortfolioTest extends TestCase
 {
     public function test_sum_potfolio() {
-        $bank = Bank::create(Currency::EUR(), Currency::USD(), 1.2);
+        $bank = BankBuilder::aBank()->withPivotCurency(Currency::EUR())->withExancheRate(1.2, Currency::USD())->build();
+        // $bank = Bank::create(Currency::EUR(), Currency::USD(), 1.2);
         $portfolio = new Portfolio($bank);
         $money = new Money(5,Currency::USD());
         $money2 = new Money(10,Currency::EUR()); 
@@ -21,7 +23,11 @@ class PortfolioTest extends TestCase
     }
     
     public function test_add_potfolio() {
-        $bank = Bank::create(Currency::EUR(), Currency::USD(), 1.2);
+        $bank = BankBuilder::aBank()
+            ->withPivotCurency(Currency::EUR())
+            ->withExancheRate(1.2, Currency::USD())
+            ->build();
+        //$bank = Bank::create(Currency::EUR(), Currency::USD(), 1.2);
         $portfolio = new Portfolio($bank);
         $money = new Money(5,Currency::EUR());
         $money2 = new Money(5,Currency::EUR()); 
@@ -34,7 +40,11 @@ class PortfolioTest extends TestCase
     }
 
     public function test_convert_potfolio() {
-        $bank = Bank::create(Currency::EUR(), Currency::KRW(), 1344);
+        $bank = BankBuilder::aBank()
+            ->withPivotCurency(Currency::EUR())
+            ->withExancheRate(1344, Currency::KRW())
+            ->build();
+        //$bank = Bank::create(Currency::EUR(), Currency::KRW(), 1344);
         $bank = $bank->addEchangeRate(Currency::USD(), Currency::KRW(), 1100);
         $portfolio = new Portfolio($bank);
         $money = new Money(5,Currency::USD());
@@ -46,7 +56,11 @@ class PortfolioTest extends TestCase
     }
 
     public function test_convert2_potfolio() {
-        $bank = Bank::create(Currency::USD(), Currency::KRW(), 1100);
+        $bank = BankBuilder::aBank()
+            ->withPivotCurency(Currency::USD())
+            ->withExancheRate(1100, Currency::KRW())
+            ->build();
+        //$bank = Bank::create(Currency::USD(), Currency::KRW(), 1100);
         $money = new Money(1,Currency::USD());
         $money2 = new Money(1100,Currency::KRW()); 
         $portfolio = new Portfolio($bank);
@@ -57,7 +71,11 @@ class PortfolioTest extends TestCase
     }
 
     public function test_sum2_potfolio() {
-        $bank = Bank::create(Currency::EUR(), Currency::USD(), 1.2);
+        $bank = BankBuilder::aBank()
+            ->withPivotCurency(Currency::EUR())
+            ->withExancheRate(1.2, Currency::USD())
+            ->build();
+        //$bank = Bank::create(Currency::EUR(), Currency::USD(), 1.2);
         $portfolio = new Portfolio($bank);
         $money = new Money(5,Currency::USD());
         $money3 = new Money(5,Currency::USD());
