@@ -42,19 +42,6 @@ class Bank
         $this->exchangeRates[($this->getKey($fromDevise, $toDevise))] = $rate;
     }
 
-    /**
-     * @param float $amount
-     * @param Currency $fromDevise
-     * @param Currency $toDevise
-     * @return float
-     * @throws MissingExchangeRateException
-     */
-    public function convertOld(float $amount, Currency $fromDevise, Currency $toDevise): float
-    {
-        $money = new Money($amount, $fromDevise);
-        return $this->convert($money, $toDevise)->getMoney();
-    }
-
     private function isConvertNonValid(Currency $fromDevise, Currency $toDevise): bool
     {
         return ($fromDevise != $toDevise && !array_key_exists($this->getKey($fromDevise, $toDevise), $this->exchangeRates));
