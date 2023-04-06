@@ -91,3 +91,32 @@ Tous les taux de change doivent être définis de la devise pivot vers une autre
 - Pour chaque règle, nous avons besoin d'un ou plusieurs exemples pour les illustrer. Les écrire sur des post-it verts et les placer sous la règle correspondante.
 - En échangeant sur ces exemples, vous pouvez découvrir des questions pour lesquelles personne autour de la table ne peut répondre : les écrire sur des post-it rouges et continuer la conversation. 
 
+## Format de restitution
+(pour chaque US)
+
+### Titre de l'US (post-it jaunes)
+
+> Question (post-it rouge)
+ 
+#### Règle Métier (post-it bleu)
+
+Exemple: (post-it vert)
+```gherkin
+Given ...
+When ...
+Then ...
+```
+
+### Conversion de devises
+
+> Que se passe-t-il si nous voulons convertir dans une devise inconnue du système ?
+
+#### Erreur en cas de devise inconnue
+```gherkin
+Given a bank with Euro as Pivot Currency
+When I convert 10 Euros to Korean Wons
+Then I receive an error explaining that the system has no exchange rate
+```
+
+
+
