@@ -2,12 +2,16 @@ import { Currency } from '../src/Currency';
 import { Bank } from '../src/Bank';
 import { MissingExchangeRateError } from '../src/MissingExchangeRateError';
 import { Money } from '../src/Money';
+import { BankBuilder } from './builders/BankBuilder';
 
 describe('Bank', function () {
 	let bank: Bank;
 
 	beforeEach(() => {
-		bank = Bank.withExchangeRate(Currency.EUR, Currency.USD, 1.2);
+		bank = BankBuilder.aBank()
+			.withPivotCurrency(Currency.EUR)
+			.withExchangeRate(1.2, Currency.USD)
+			.build();
 	});
 
 	test(`convert EUR to USD return number`, () => {
@@ -31,15 +35,6 @@ describe('Bank', function () {
 
 		expect(() => bank.Convert(moneyEur, Currency.KRW))
 			.toThrow(MissingExchangeRateError)
-			.toThrow('EUR-> KRW');
-	});
-
-	test(`convert with different exchange rates returns different numbers`, () => {
-		bank.AddExchangeRate(Currency.USD, Currency.EUR, 1.3);
-		const moneyUsd = new Money(10, Currency.USD);
-
-		const moneyConverted = bank.Convert(moneyUsd, Currency.EUR);
-
-		expect(moneyConverted).toStrictEqual(new Money(13, Currency.EUR));
+			.toThrow('EUR->KRW');
 	});
 });

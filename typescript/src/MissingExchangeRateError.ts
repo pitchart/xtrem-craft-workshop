@@ -1,9 +1,9 @@
-import { Currency } from './Currency'
+import { Currency } from './Currency';
 
 export class MissingExchangeRateError extends Error {
-  constructor (fromCurrency: Currency, toCurrency: Currency) {
-    super(fromCurrency + '-> ' + toCurrency)
-  }
+	constructor(fromCurrency: Currency, toCurrency: Currency) {
+		super(fromCurrency + '->' + toCurrency);
+	}
 
-  message: string
+	message: string;
 }
