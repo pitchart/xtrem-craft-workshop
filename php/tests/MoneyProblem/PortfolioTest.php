@@ -11,13 +11,15 @@ use Tests\MoneyProblem\BankBuilder;
 class PortfolioTest extends TestCase
 {
     public function test_sum_potfolio() {
-        $bank = BankBuilder::aBank()->withPivotCurency(Currency::EUR())->withExancheRate(1.2, Currency::USD())->build();
-        // $bank = Bank::create(Currency::EUR(), Currency::USD(), 1.2);
+        $bank = BankBuilder::aBank()
+                ->withPivotCurency(Currency::EUR())
+                ->withExancheRate(1.2, Currency::USD())
+                ->build();
         $portfolio = new Portfolio($bank);
-        $money = new Money(5,Currency::USD());
-        $money2 = new Money(10,Currency::EUR()); 
-        $portfolio = $portfolio->addMoney($money);
-        $portfolio = $portfolio->addMoney($money2);
+        $moneyUSD = new Money(5,Currency::USD());
+        $moneyEUR = new Money(10,Currency::EUR()); 
+        $portfolio = $portfolio->addMoney($moneyUSD);
+        $portfolio = $portfolio->addMoney($moneyEUR);
         $sum = $portfolio->sum(Currency::USD());
         $this->assertEquals(17, $sum);
     }
@@ -27,7 +29,6 @@ class PortfolioTest extends TestCase
             ->withPivotCurency(Currency::EUR())
             ->withExancheRate(1.2, Currency::USD())
             ->build();
-        //$bank = Bank::create(Currency::EUR(), Currency::USD(), 1.2);
         $portfolio = new Portfolio($bank);
         $money = new Money(5,Currency::EUR());
         $money2 = new Money(5,Currency::EUR()); 
@@ -43,16 +44,15 @@ class PortfolioTest extends TestCase
         $bank = BankBuilder::aBank()
             ->withPivotCurency(Currency::EUR())
             ->withExancheRate(1344, Currency::KRW())
+            ->withExancheRate(1.2, Currency::USD())
             ->build();
-        //$bank = Bank::create(Currency::EUR(), Currency::KRW(), 1344);
-        $bank = $bank->addEchangeRate(Currency::USD(), Currency::KRW(), 1100);
         $portfolio = new Portfolio($bank);
-        $money = new Money(5,Currency::USD());
-        $money2 = new Money(10,Currency::EUR()); 
-        $portfolio = $portfolio->addMoney($money);
-        $portfolio = $portfolio->addMoney($money2);
+        $moneyUSD = new Money(5,Currency::USD());
+        $moneyEUR = new Money(10,Currency::EUR()); 
+        $portfolio = $portfolio->addMoney($moneyUSD);
+        $portfolio = $portfolio->addMoney($moneyEUR);
         $sum = $portfolio->sum(Currency::KRW());
-        $this->assertEquals(18940, $sum);
+        $this->assertEquals(19040.00448, $sum);
     }
 
     public function test_convert2_potfolio() {
@@ -60,7 +60,6 @@ class PortfolioTest extends TestCase
             ->withPivotCurency(Currency::USD())
             ->withExancheRate(1100, Currency::KRW())
             ->build();
-        //$bank = Bank::create(Currency::USD(), Currency::KRW(), 1100);
         $money = new Money(1,Currency::USD());
         $money2 = new Money(1100,Currency::KRW()); 
         $portfolio = new Portfolio($bank);
@@ -75,7 +74,6 @@ class PortfolioTest extends TestCase
             ->withPivotCurency(Currency::EUR())
             ->withExancheRate(1.2, Currency::USD())
             ->build();
-        //$bank = Bank::create(Currency::EUR(), Currency::USD(), 1.2);
         $portfolio = new Portfolio($bank);
         $money = new Money(5,Currency::USD());
         $money3 = new Money(5,Currency::USD());

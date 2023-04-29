@@ -41,13 +41,6 @@ Règles :
 
 ```gherkin
 Given a bank with EUROS as pivot
-When I want to add a exhange rate without currency
-OR a new currecncy without exchange rate
-Then i want an error
-```
-
-```gherkin
-Given a bank with EUROS as pivot
 When I define an exchange rate of 1344 to KRW
 AND I define an exchange rate of 1.2 to USD
 Then I can convert from 15 KRW to 0.013 USD

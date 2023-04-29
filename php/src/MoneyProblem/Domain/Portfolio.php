@@ -62,11 +62,8 @@ class Portfolio {
         return $amount;
     }
 
-    private function setBank(Bank $bank) : void {
-        $this->bank = $bank;
-    }
 
-    protected function getBank() : Bank {
+    private function getBank() : Bank {
         return $this->bank;
     }
 
@@ -74,7 +71,7 @@ class Portfolio {
         $this->wallet = $wallet;
     }
 
-    protected function getWallet() : array {
+    private function getWallet() : array {
         return $this->wallet;
     }
 }

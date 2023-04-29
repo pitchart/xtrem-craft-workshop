@@ -7,7 +7,7 @@ use MoneyProblem\Domain\Bank;
 
 class BankBuilder
 {
-    private $currency;
+    private Currency $currency;
     private $rates = array();
 
     static function aBank() : BankBuilder{
@@ -25,9 +25,9 @@ class BankBuilder
     }
 
     function build() : Bank {
-        $bank = new Bank(); 
+        $bank = new Bank($this->currency);
         foreach($this->rates as $exchangeRate) {
-            $bank->addEchangeRate($this->currency, $exchangeRate["currency"], $exchangeRate["value"]);
+            $bank->addRate($exchangeRate["currency"], $exchangeRate["value"]);
         }
         return $bank;
     }
