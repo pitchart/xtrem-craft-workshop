@@ -1,4 +1,5 @@
 ### Appris
+
 ```
 Que Grégory est un super dév !
 
@@ -8,7 +9,9 @@ Le code smell
 
 Le mapping des USER STORIES (la scéance du example-mapping)
 ```
+
 ### Surpris
+
 ```
 Que Grégory est un super dév !
 
@@ -19,6 +22,7 @@ Utilité des tests pour le refactoring
 Difficulté de refactorer le code en code propre
 ```
 ### Lundi
+
 ```
 La gestion des user stories avec le mapping, peut etre pas
 écrire les tests unitaires mais au moins cerner touts les cas d'utilisations

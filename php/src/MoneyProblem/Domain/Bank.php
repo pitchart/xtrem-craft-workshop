@@ -24,32 +24,6 @@ class Bank
         $newBank->setRates($this->rates);
         return $newBank;
     }
-
-    /**
-     * @throws MissingExchangeRateException
-     */
-    public function convertOld(Money $money, Currency $to)
-    {
-        if($money->getCurrency() == $to) {
-            return $money->getAmount();
-        } else if($to == $this->pivotCurrency) {
-            if(!$this->canConvert($money->getCurrency())) {
-                throw new MissingExchangeRateException($money->getCurrency(), $to);
-            }
-            return $this->convertToPivot($money->getAmount(), $money->getCurrency());
-        } else if($money->getCurrency() == $this->pivotCurrency) {
-            if(!$this->canConvert($to)) {
-                throw new MissingExchangeRateException($money->getCurrency(), $to);
-            }
-            return $this->convertFromPivot($money->getAmount(), $to);
-        } else {
-            if(!$this->canConvert($money->getCurrency()) || !$this->canConvert($to) ) {
-                throw new MissingExchangeRateException($money->getCurrency(), $to);
-            }
-            return $this->convertWithPivot($money, $to);
-        }
-    }
-
     
     /**
      * @throws MissingExchangeRateException
