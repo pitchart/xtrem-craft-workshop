@@ -6,7 +6,7 @@ Prendre quelques instants pour lire le contenu de la page [No Primitive Types](h
 
 ## Nouveau concept : `Money`
 Éliminer le code smell `Primitive Obsession` en introduisant le concept de `Money` à partir des tests, toujours en utilisant le `Test Driven Development`.
-Partir des opérations de calcul, puis adapter le `Portfolio` et la `Bank` en utilisant ce nouvea `Value Object`.
+Partir des opérations de calcul, puis adapter le `Portfolio` et la `Bank` en utilisant ce nouveau `Value Object`.
 
 ### Contrainte
 
