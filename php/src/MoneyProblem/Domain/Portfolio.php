@@ -43,7 +43,7 @@ class Portfolio {
     public function sum(Currency $currency){
         $sum = 0;
         foreach ($this->wallet as $money) {
-            $sum += $this->bank->convert($money, $currency);
+            $sum += $this->bank->convert($money, $currency)->getAmount();
         }
         return $sum;
     }
