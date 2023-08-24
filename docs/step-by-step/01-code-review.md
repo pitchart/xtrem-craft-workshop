@@ -1,11 +1,11 @@
 # Code review
 
-## Tâches
+## TODO
 
-> Réaliser une revue de code en équipe du code et des tests
+> En équipe, réaliser une revue de code du code et des tests
 
 - Que cherchons-nous ?
-  - comprendre le fonctionnel
+  - comprendre le métier
   - des code smells
   - de mauvais nommages
   - de la duplication
@@ -14,4 +14,4 @@
   
 > Partager le résultat dans un backlog d'amélioration continue
 
-Sur votre dépôt de code, ajouter une issue par point d'amélioration, cette base sera utile pour la suite
+Dans le fichier [code review](../solution/01-code-review.md), ajouter une issue par point d'amélioration, cette base sera utile pour la suite.
