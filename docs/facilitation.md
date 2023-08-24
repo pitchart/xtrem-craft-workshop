@@ -72,7 +72,6 @@ Bank implementation :
   - [Concrete Practice: test pipeline](./step-by-step/07-continuous-integration.md)
 - [SOLID / Supple Design](https://pitchart.github.io/dawin-software-craftsmanship/#/4/17)
   - [Concrete Practice: Fight primitive obsession](./step-by-step/08-fight-primitive-obsession.md)
-  - [Concrete Practice: Use only immutable types](./step-by-step/09-immutable-types.md)
 - [Example mapping]()
   - [Concrete Pratice: Backlog refinement](./step-by-step/10-example-mapping.md)
 - [Test Data Builders]()
