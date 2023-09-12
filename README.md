@@ -1,3 +1,11 @@
+## Membres de l'équipe :
+
+-LAPORTE Pierre
+-LEVRAULT Damien
+-BIBARD Yann
+-NUNES Theo
+-MERCIER-TALLET Yanis
+
 # Xtrem Craft workshop
 
 This workshop is based on the [Xtrem TDD workshop](https://github.com/les-tontons-crafters/xtrem-tdd-money-kata), 
