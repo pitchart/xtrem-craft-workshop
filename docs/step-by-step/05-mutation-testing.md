@@ -13,6 +13,7 @@ Prendre un peu de temps pour découvrir le concept de [Mutation Testing](https:/
   - csharp => [stryker.NET](https://stryker-mutator.io/docs/stryker-net/introduction/)
   - php => [infection](https://infection.github.io/guide/)
   - typescript => [stryker-js](https://stryker-mutator.io/docs/stryker-js/introduction/)
+  - python => [mutmut](https://mutmut.readthedocs.io/en/latest/)
 - Analyser les résultats obtenus
 
 ## La chasse aux mutants

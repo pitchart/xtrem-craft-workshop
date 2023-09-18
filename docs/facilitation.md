@@ -67,7 +67,7 @@ Bank implementation :
   - [Concrete Practice: Mutation testing](./step-by-step/05-mutation-testing.md)
 - [Mob programming extended](https://pitchart.github.io/dawin-software-craftsmanship/#/2/6)
 - [Test Driven Development](https://pitchart.github.io/dawin-software-craftsmanship/#/3/9)
-  - [Concrete Practice: Implement Portfolio](./step-by-step/06-test-driven-development.md)
+  - [Concrete Practice: Implement Portfolio](./step-by-step/07-test-driven-development.md)
 - [Continuous Integration / Continuous Delivery](https://pitchart.github.io/dawin-software-craftsmanship/#/2/8)
   - [Concrete Practice: test pipeline](./step-by-step/07-continuous-integration.md)
 - [SOLID / Supple Design](https://pitchart.github.io/dawin-software-craftsmanship/#/4/17)
