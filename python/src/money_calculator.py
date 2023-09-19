@@ -7,7 +7,7 @@ class MoneyCalculator:
         return float(amount + amount2)
     
     @staticmethod
-    def times(amount: float, currency: Currency, value: int) -> float:
+    def multiply(amount: float, currency: Currency, value: int) -> float:
         return amount * value
     
     @staticmethod
