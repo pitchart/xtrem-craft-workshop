@@ -5,7 +5,7 @@ public class MoneyCalculator {
         return amount + amount2;
     }
 
-    public static double times(double amount, Currency currency, int value) {
+    public static double multiply(double amount, Currency currency, int value) {
         return amount * value;
     }
 

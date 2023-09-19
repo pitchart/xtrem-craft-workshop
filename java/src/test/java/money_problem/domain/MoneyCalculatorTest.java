@@ -1,27 +1,30 @@
 package money_problem.domain;
 
-import org.junit.jupiter.api.DisplayName;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 import static money_problem.domain.Currency.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class MoneyCalculatorTest {
     @Test
     void shouldAddInUsd() {
-        assertThat(MoneyCalculator.add(5, USD, 10))
-                .isNotNull();
+        double money = 5;
+        money = MoneyCalculator.add(money, USD, 10);
+        assertEquals(money, 15);
     }
 
     @Test
     void shouldMultiplyInEuros() {
-        assertThat(MoneyCalculator.times(10, EUR, 2))
-                .isEqualTo(20);
+        double money = 10;
+        money = MoneyCalculator.multiply(money, USD, 2);
+        assertEquals(money, 20);
     }
 
     @Test
     void shouldDivideInKoreanWons() {
-        assertThat(MoneyCalculator.divide(4002, KRW, 4))
-                .isEqualTo(1000.5);
+        double money = 4002;
+        money = MoneyCalculator.divide(money, USD, 4);
+        assertEquals(money, 1000.5);  
     }
 }
