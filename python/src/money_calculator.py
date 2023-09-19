@@ -1,6 +1,3 @@
-from .currency import Currency
-
-
 class MoneyCalculator:
     @staticmethod
     def add(amount: float, amount2: float) -> float:

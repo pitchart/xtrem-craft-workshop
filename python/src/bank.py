@@ -6,20 +6,22 @@ from .missing_exchange_rate_error import MissingExchangeRateError
 class Bank:
     _exchange_rate: Dict[str, float] = {}
 
-    def __init__(self, exchange_rate = {}) -> None:
-        self._exchange_rate = exchange_rate
+    def __init__(self, exchange_rates = {}) -> None:
+        self._exchange_rates = exchange_rates
 
     @staticmethod
-    def create(currency1: Currency, currency2: Currency, rate: float) -> "Bank":
+    def create_bank(currency_init: Currency, currency_final: Currency, exchange_rate: float) -> "Bank":
         bank = Bank({})
-        bank.addEchangeRate(currency1, currency2, rate)
-
+        bank.add_exchange_rate(currency_init, currency_final, exchange_rate)
         return bank
     
-    def addEchangeRate(self, currency1: Currency, currency2: Currency, rate: float) -> None:
-        self._exchange_rate[f'{currency1.value}->{currency2.value}'] = rate
+    def add_exchange_rate(self, currency_init: Currency, currency_final: Currency, exchange_rate: float) -> None:
+        self._exchange_rates[f'{currency_init.value}->{currency_final.value}'] = exchange_rate
 
-    def convert(self, amount: float, currency1: Currency, currency2: Currency) -> float:
-        if not (currency1.value == currency2.value or f'{currency1.value}->{currency2.value}' in self._exchange_rate):
-            raise MissingExchangeRateError(currency1, currency2)
-        return amount if currency1.value == currency2.value  else amount * self._exchange_rate[f'{currency1.value}->{currency2.value}']
+    def convert_currency(self, amount: float, currency_init: Currency, currency_final: Currency) -> float:
+        if not (currency_init.value == currency_final.value or f'{currency_init.value}->{currency_final.value}' in self._exchange_rates):
+            raise MissingExchangeRateError(currency_init, currency_final)
+        if currency_init.value == currency_final.value:
+            return amount
+        else:
+            amount * self._exchange_rates[f'{currency_init.value}->{currency_final.value}']
