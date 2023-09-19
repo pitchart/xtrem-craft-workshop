@@ -13,15 +13,14 @@ public final class Bank {
     public static Bank withExchangeRate(Currency currency1, Currency currency2, double rate) {
         var bank = new Bank(new HashMap<>());
         bank.addExchangeRate(currency1, currency2, rate);
-
         return bank;
     }
 
     public void addExchangeRate(Currency currency1, Currency currency2, double rate) {
-        exchangeRates.put(currency1 + "->" + currency2, rate);
+        this.exchangeRates.put(currency1 + "->" + currency2, rate);
     }
 
-    public double convert(double amount, Currency currency1, Currency currency2) throws MissingExchangeRateException {
+    public double convertMoney(double amount, Currency currency1, Currency currency2) throws MissingExchangeRateException {
         if (!(currency1 == currency2 || exchangeRates.containsKey(currency1 + "->" + currency2))) {
             throw new MissingExchangeRateException(currency1, currency2);
         }
