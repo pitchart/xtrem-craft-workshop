@@ -6,7 +6,7 @@ from python.src.missing_exchange_rate_error import MissingExchangeRateError
 
 
 class TestBank:
-    def test_convert_currency_euro_to_usd_returns_right_amount(self) -> float:
+    def test_convert_currency_euro_to_usd_returns_right_amount(self):
         #Arrange
         exchange_rate = 1.2
         bank: Bank = Bank.create_bank(Currency.EUR, Currency.USD, exchange_rate)

@@ -1,5 +1,5 @@
 #### Members : Loué Emilien, Boudmea Nassim, Dupin Rémy, Odufejo Ogoe Olubusola
-### Chosen langage : PHP
+### Chosen langage : Python
 
 # Xtrem Craft workshop
 
