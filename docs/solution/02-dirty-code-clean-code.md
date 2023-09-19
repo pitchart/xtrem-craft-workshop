@@ -1,6 +1,6 @@
 # Clean code VS Dirty code
 
-## What's dirty code ?
+## Qu'est ce que du code sale ?
 
 - Code mort
 - Respecte pas les normes qui existent déjà
@@ -14,7 +14,7 @@
 - Duplication de code
 - Fonctions trop longues 
 
-## What's clean code ?
+## Qu'est ce que du code propre ?
 
 - Flexible (possibilité ajout extension)
 - Versions dépendances mises à jour récemmeent
