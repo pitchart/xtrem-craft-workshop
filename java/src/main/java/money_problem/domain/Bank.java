@@ -22,7 +22,7 @@ public final class Bank {
     }
 
     public double convertBaseAmountToQuote(double baseAmount, Currency baseCurrency, Currency quoteCurrency) throws MissingExchangeRateException {
-        if (((baseCurrency =! quoteCurrency) && !exchangeRates.containsKey(baseCurrency + "->" + quoteCurrency))) {
+        if (((baseCurrency != quoteCurrency) && !exchangeRates.containsKey(baseCurrency + "->" + quoteCurrency))) {
             throw new MissingExchangeRateException(baseCurrency, quoteCurrency);
         }
         return baseCurrency == quoteCurrency

@@ -9,22 +9,45 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class BankTest {
 
     @Test
-    void convert_eur_to_usd_returns_double() throws MissingExchangeRateException {
-        assertThat(Bank.createBankWithExchangeRate(EUR, USD, 1.2).conconvertBaseAmountToQuote(10, EUR, USD))
-                .isEqualTo(12);
+    void testConvertionDifferentCurrenciesReturnsRightAmount() throws MissingExchangeRateException {
+        //Arrange
+        Double exchangeRate = 1.2;
+        Double baseAmount = 10;
+        Bank bank = Bank.createBankWithExchangeRate(EUR, USD, exchangeRate);
+        Double expectedQuoteAmount = exchangeRate * baseAmount;
+        //Act
+        Double result = bank.convertBaseAmountToQuote(baseAmount, EUR, USD);
+        //Assert
+        assertThat(result)
+                .isEqualTo(expectedQuoteAmount);
     }
 
     @Test
-    void convert_eur_to_eur_returns_same_value() throws MissingExchangeRateException {
-        assertThat(Bank.createBankWithExchangeRate(EUR, USD, 1.2).convertBaseAmountToQuote(10, EUR, EUR))
-                .isEqualTo(10);
+    void testConvertionSameCurrenciesReturnsRightAmount() throws MissingExchangeRateException {
+        //Arrange
+        Double exchangeRate = 1.2;
+        Double baseAmount = 10;
+        Bank bank = Bank.createBankWithExchangeRate(EUR, USD, exchangeRate);
+        Double expectedQuoteAmount = baseAmount;
+        //Act
+        Double result = bank.convertBaseAmountToQuote(baseAmount, EUR, EUR);
+        //Assert
+        assertThat(result)
+                .isEqualTo(expectedQuoteAmount);
     }
 
     @Test
-    void convert_throws_exception_on_missing_exchange_rate() {
-        assertThatThrownBy(() -> Bank.createBankWithExchangeRate(EUR, USD, 1.2).convertBaseAmountToQuote(10, EUR, KRW))
-                .isInstanceOf(MissingExchangeRateException.class)
-                .hasMessage("EUR->KRW");
+    void testConvertThrowsExceptionOnMissingExchangeRate() {
+        //Arrange
+        Double exchangeRate = 1.2;
+        Double baseAmount = 10;
+        Class expectedThrownClass = MissingExchangeRateException.class;
+        String expectedThrownMessage = "EUR->KRW"
+        Bank bank = Bank.createBankWithExchangeRate(EUR, USD, exchangeRate);
+        //Act/Assert
+        assertThatThrownBy(() -> bank.convertBaseAmountToQuote(10, EUR, KRW))
+                .isInstanceOf(expectedThrownClass)
+                .hasMessage(expectedThrownMessage);
     }
 
     @Test
