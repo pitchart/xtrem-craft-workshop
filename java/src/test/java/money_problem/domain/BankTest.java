@@ -12,7 +12,7 @@ class BankTest {
     void testConvertionDifferentCurrenciesReturnsRightAmount() throws MissingExchangeRateException {
         //Arrange
         Double exchangeRate = 1.2;
-        Double baseAmount = 10;
+        int baseAmount = 10;
         Bank bank = Bank.createBankWithExchangeRate(EUR, USD, exchangeRate);
         Double expectedQuoteAmount = exchangeRate * baseAmount;
         //Act
@@ -26,9 +26,9 @@ class BankTest {
     void testConvertionSameCurrenciesReturnsRightAmount() throws MissingExchangeRateException {
         //Arrange
         Double exchangeRate = 1.2;
-        Double baseAmount = 10;
+        int baseAmount = 10;
         Bank bank = Bank.createBankWithExchangeRate(EUR, USD, exchangeRate);
-        Double expectedQuoteAmount = baseAmount;
+        int expectedQuoteAmount = baseAmount;
         //Act
         Double result = bank.convertBaseAmountToQuote(baseAmount, EUR, EUR);
         //Assert
@@ -40,9 +40,9 @@ class BankTest {
     void testConvertThrowsExceptionOnMissingExchangeRate() {
         //Arrange
         Double exchangeRate = 1.2;
-        Double baseAmount = 10;
+        int baseAmount = 10;
         Class expectedThrownClass = MissingExchangeRateException.class;
-        String expectedThrownMessage = "EUR->KRW"
+        String expectedThrownMessage = "EUR->KRW";
         Bank bank = Bank.createBankWithExchangeRate(EUR, USD, exchangeRate);
         //Act/Assert
         assertThatThrownBy(() -> bank.convertBaseAmountToQuote(10, EUR, KRW))
