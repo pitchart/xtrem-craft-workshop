@@ -24,4 +24,4 @@ class Bank:
         if currency_init.value == currency_final.value:
             return amount
         else:
-            amount * self._exchange_rates[f'{currency_init.value}->{currency_final.value}']
+            return amount * self._exchange_rates[f'{currency_init.value}->{currency_final.value}']
