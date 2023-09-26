@@ -1,4 +1,4 @@
-#### Members : Loué Emilien, Boudmea Nassim, Dupin Rémy, Odufejo Ogoe Olubusola
+#### Members : Loué Emilien, Dupin Rémy, Odufejo Ogoe Olubusola
 ### Chosen langage : Python
 
 # Xtrem Craft workshop
