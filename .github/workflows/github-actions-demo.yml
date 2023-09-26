@@ -16,4 +16,4 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - run: javac -d target -cp target:junit-platform-console-standalone-1.7.2.jar xtrem-craft-workshop\java\src\test\java\money_problem\domain\MoneyCalculatorTest.java
+      - run: javac -d target -cp target:junit-platform-console-standalone-1.7.2.jar xtrem-craft-workshop/java/src/test/java/money_problem/domain/MoneyCalculatorTest.java
