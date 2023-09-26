@@ -1,3 +1,6 @@
+#### Members : Loué Emilien, Dupin Rémy, Odufejo Ogoe Olubusola
+### Chosen langage : Python
+
 # Xtrem Craft workshop
 
 This workshop is based on the [Xtrem TDD workshop](https://github.com/les-tontons-crafters/xtrem-tdd-money-kata), 
