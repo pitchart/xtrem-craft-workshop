@@ -12,7 +12,7 @@ class BankTest {
     void convert_eur_to_usd_test() throws MissingExchangeRateException {
         double rate = 1.2;
         Bank bank = Bank.withExchangeRate(EUR, USD, rate);
-        double convertedMoney = bank.convertMoney(10, EUR, USD);
+        double convertedMoney = bank.convertMoney(new Money(EUR, 10), USD);
         assertThat(convertedMoney).isEqualTo(12);
     }
 
@@ -28,7 +28,7 @@ class BankTest {
     void missing_exchange_rate_test() {
         double rate = 1.2;
         Bank bank = Bank.withExchangeRate(EUR, USD, rate);
-        assertThatThrownBy(() -> bank.convertMoney(10, EUR, KRW))
+        assertThatThrownBy(() -> bank.convertMoney(new Money(EUR, 10), KRW))
                 .isInstanceOf(MissingExchangeRateException.class)
                 .hasMessage("EUR->KRW");
     }
@@ -36,11 +36,11 @@ class BankTest {
     @Test
     void different_exchange_rates_test() throws MissingExchangeRateException {
         Bank firstBank = Bank.withExchangeRate(EUR, USD, 1.2);
-        double firstConvertedMoney = firstBank.convertMoney(10, EUR, USD);
+        double firstConvertedMoney = firstBank.convertMoney(new Money(EUR, 10), USD);
         assertThat(firstConvertedMoney).isEqualTo(12);
 
         Bank secondBank = Bank.withExchangeRate(EUR, USD, 1.3);
-        double secondConvertedMoney = secondBank.convertMoney(10, EUR, USD);
+        double secondConvertedMoney = secondBank.convertMoney(new Money(EUR, 10), USD);
         assertThat(secondConvertedMoney).isEqualTo(13);
     }
 }

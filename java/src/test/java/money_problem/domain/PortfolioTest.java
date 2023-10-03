@@ -14,11 +14,12 @@ class PortfolioTest {
     void addInPortfolioTest() {
         Portfolio portfolio = new Portfolio();
 
-        portfolio.addInPortfolio(Currency.EUR, 10);
+        portfolio.addInPortfolio(new Money(Currency.EUR, 10));
         assertTrue(portfolio.getMoney(Currency.EUR) == 10);
 
-        portfolio.addInPortfolio(Currency.EUR, -1);
+        portfolio.addInPortfolio(new Money(Currency.EUR, -1));
         assertTrue(portfolio.getMoney(Currency.EUR) == 10);
+        assertTrue(portfolio.getMoney(Currency.KRW) == 0);
     }
 
 

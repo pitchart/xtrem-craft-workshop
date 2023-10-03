@@ -10,21 +10,21 @@ class MoneyCalculatorTest {
     @Test
     void shouldAddInUsd() {
         double money = 5;
-        money = MoneyCalculator.add(money, USD, 10);
+        money = MoneyCalculator.add(money, new Money(USD, 10));
         assertEquals(money, 15);
     }
 
     @Test
     void shouldMultiplyInEuros() {
         double money = 10;
-        money = MoneyCalculator.multiply(money, USD, 2);
+        money = MoneyCalculator.multiply(money, new Money(USD, 2));
         assertEquals(money, 20);
     }
 
     @Test
     void shouldDivideInKoreanWons() {
         double money = 4002;
-        money = MoneyCalculator.divide(money, USD, 4);
+        money = MoneyCalculator.divide(money, new Money(USD, 4));
         assertEquals(money, 1000.5);  
     }
 }
