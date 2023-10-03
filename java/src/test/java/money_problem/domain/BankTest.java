@@ -43,9 +43,4 @@ class BankTest {
         double secondConvertedMoney = secondBank.convertMoney(10, EUR, USD);
         assertThat(secondConvertedMoney).isEqualTo(13);
     }
-
-    @Test
-    public void test(){
-        assertThat(false).isTrue();
-    }
 }
