@@ -5,5 +5,10 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out code
+        uses: actions/checkout@v2
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: cd java/ && mvn test
+      - name: Build and Test with Maven
+        run: |
+          cd java 
+          mvn test
