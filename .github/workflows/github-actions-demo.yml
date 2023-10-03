@@ -12,3 +12,8 @@ jobs:
         run: |
           cd java 
           mvn test
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test Results
+          path: java/target/surefire-reports
