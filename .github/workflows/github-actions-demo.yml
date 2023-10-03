@@ -5,6 +5,11 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
       - name: Check out code
         uses: actions/checkout@v2
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
