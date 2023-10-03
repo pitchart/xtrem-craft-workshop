@@ -1,5 +1,7 @@
 package money_problem.domain;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,11 +14,11 @@ class PortfolioTest {
     void addInPortfolioTest() {
         Portfolio portfolio = new Portfolio();
 
-        portfolio.addInPortfolio("EUR", 10);
-        assertTrue(portfolio.getValue() == 10);
+        portfolio.addInPortfolio(Currency.EUR, 10);
+        assertTrue(portfolio.getMoney(Currency.EUR) == 10);
 
-        protfolio.addInPortfolio(("EUR", -1));
-        assertTrue(portfolio.getValue() == 10)
+        portfolio.addInPortfolio(Currency.EUR, -1);
+        assertTrue(portfolio.getMoney(Currency.EUR) == 10);
     }
 
 
