@@ -20,13 +20,13 @@ public final class Bank {
         this.exchangeRates.put(currency1 + "->" + currency2, rate);
     }
 
-    public double convertMoney(double amount, Currency currency1, Currency currency2) throws MissingExchangeRateException {
-        if (!(currency1 == currency2 || exchangeRates.containsKey(currency1 + "->" + currency2))) {
-            throw new MissingExchangeRateException(currency1, currency2);
+    public double convertMoney(Money money, Currency currency) throws MissingExchangeRateException {
+        if (!(money.getCurrency() == currency || exchangeRates.containsKey(money.getCurrency() + "->" + currency))) {
+            throw new MissingExchangeRateException(money.getCurrency(), currency);
         }
-        return currency1 == currency2
-                ? amount
-                : amount * exchangeRates.get(currency1 + "->" + currency2);
+        return money.getCurrency() == currency
+                ? money.getAmount()
+                : money.getAmount() * exchangeRates.get(money.getCurrency() + "->" + currency);
     }
 
 }

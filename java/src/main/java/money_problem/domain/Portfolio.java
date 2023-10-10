@@ -1,19 +1,48 @@
 package money_problem.domain;
 
-class Portfolio {
-    private double value;
+import java.util.ArrayList;
 
-    Portfolio() {
-        this.value = 0;
+public class Portfolio {
+    //private ArrayList<Money> moneys;
+    private ArrayList<Money> moneys;
+
+    Portfolio(){
+        moneys = new ArrayList<Money>();
     }
 
-    double getValue() {
-        return value;
-    }
-
-    void addInPortfolio(String currency, double amount) {
-        if (amount > 0) {
-            value += amount;
+    public void addInPortfolio(Money myMoney){
+        if(myMoney.getAmount() > 0){
+            int indexCurrency = this.findCurrency(myMoney.getCurrency());
+            if(indexCurrency != -1){
+                moneys.get(indexCurrency).addCurrency(myMoney.getAmount());
+            }else{
+                moneys.add(new Money(myMoney.getCurrency(), myMoney.getAmount()));
+            }
         }
+    }
+
+    public double getMoney(Currency currency){
+        int indexCurrency = this.findCurrency(currency);
+        if(indexCurrency != -1){
+            return moneys.get(indexCurrency).getAmount();
+        }else{
+            return 0;
+        }
+    }
+
+    public int findCurrency(Currency currency){
+        int index = 0;
+        int indexCurrency = -1;
+        while(indexCurrency == -1 && index != this.getMoneys().size()){
+            if(this.getMoneys().get(index).getCurrency() == currency){
+                indexCurrency = index;
+            }
+            index++;
+        }
+        return indexCurrency;
+    }
+
+    public ArrayList<Money> getMoneys(){
+        return this.moneys;
     }
 }
