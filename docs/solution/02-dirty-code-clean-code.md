@@ -9,7 +9,7 @@
 - Franglais
 - Duplication de code
 - Mauvaise gestion des exceptions
-
+- Fonctions trop longues
 
 ## Qu'est-ce que du code propre ?
 
@@ -20,3 +20,4 @@
 - Code qui ne fait pas cracher l'application
 - Code optimisé
 - Utilisation de librairie récentes
+- Séparation des responsabilités
