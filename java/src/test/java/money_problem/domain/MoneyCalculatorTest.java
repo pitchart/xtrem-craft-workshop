@@ -20,7 +20,7 @@ class MoneyCalculatorTest {
         money = MoneyCalculator.multiply(money, new Money(USD, 2));
         assertEquals(money, 20);
     }
-
+    
     @Test
     void shouldDivideInKoreanWons() {
         double money = 4002;
