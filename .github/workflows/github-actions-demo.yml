@@ -1,0 +1,24 @@
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push, pull_request]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+      - name: Check out code
+        uses: actions/checkout@v2
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Build and Test with Maven
+        run: |
+          cd java 
+          mvn test
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test Results
+          path: java/target/surefire-reports
