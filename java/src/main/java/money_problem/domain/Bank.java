@@ -28,5 +28,4 @@ public final class Bank {
                 ? money.getAmount()
                 : money.getAmount() * exchangeRates.get(money.getCurrency() + "->" + currency);
     }
-
 }
