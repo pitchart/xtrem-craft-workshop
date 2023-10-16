@@ -1,12 +1,4 @@
 name: Java CI
-.before_script_templates:
-  before_script:
-    - cd ..
-    - cd ..
-    - cd ./java
-
-
-
 
 on:
   push:
