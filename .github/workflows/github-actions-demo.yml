@@ -1,9 +1,11 @@
 name: Java CI
-before_script:
-  #Going in the right directory
+.before_script_templates:
+  before_script:
     - cd ..
     - cd ..
     - cd ./java
+
+
 
 
 on:
@@ -16,6 +18,8 @@ on:
 
 jobs:
   build:
+    extends:
+      - .before_script_templates
     runs-on: ubuntu-latest
 
     steps:
@@ -35,6 +39,8 @@ jobs:
 
   mutation-testing:
     runs-on: ubuntu-latest
+    extends:
+      - .before_script_templates
     needs: build
     if: github.ref == 'refs/heads/master' || github.event_name == 'pull_request'
 
