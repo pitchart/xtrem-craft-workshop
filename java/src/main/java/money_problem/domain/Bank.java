@@ -5,8 +5,9 @@ import java.util.Map;
 
 public final class Bank {
     private final Map<String, Double> exchangeRates;
+    
 
-    private Bank(Map<String, Double> exchangeRates) {
+    public Bank(Map<String, Double> exchangeRates) {
         this.exchangeRates = exchangeRates;
     }
 
@@ -28,5 +29,4 @@ public final class Bank {
                 ? money.getAmount()
                 : money.getAmount() * exchangeRates.get(money.getCurrency() + "->" + currency);
     }
-
 }
