@@ -1,38 +1,47 @@
 package money_problem.domain;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
 
 import static money_problem.domain.Currency.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PortfolioTest {
 
-    @Test 
+    @Test
     void addInPortfolioTest() {
         Portfolio portfolio = new Portfolio();
 
         portfolio.addInPortfolio(new Money(Currency.EUR, 10));
-        assertTrue(portfolio.getMoney(Currency.EUR) == 10);
+        assertEquals(10, portfolio.getMoney(EUR));
 
-        portfolio.addInPortfolio(new Money(Currency.EUR, -1));
-        assertTrue(portfolio.getMoney(Currency.EUR) == 10);
-        assertTrue(portfolio.getMoney(Currency.KRW) == 0);
+        portfolio.addInPortfolio(new Money(EUR, -1));
+        assertEquals(10, portfolio.getMoney(EUR));
+        assertEquals(0, portfolio.getMoney(KRW));
     }
 
+    @Test
+    void getMoneyTest(){
+        Portfolio portfolio = new Portfolio();
+        portfolio.addInPortfolio(new Money(Currency.EUR, 10));
 
-    // @Test
-    // void convertAllTest() {
-    //     Map <String, Double> devises = new HashMap<String, Double>();
-    //     devises.put("EUR -> USD", 1.2);
+        assertEquals(portfolio.getMoney(Currency.EUR), 10);
+        assertEquals(portfolio.getMoney(Currency.KRW), 0);
+    }
 
-    //     Bank bank = new Bank(devises);
+    @Test
+    void findCurrencyTest(){
+        Portfolio portfolio = new Portfolio();
+        portfolio.addInPortfolio(new Money(Currency.EUR, 10));
+        portfolio.addInPortfolio(new Money(Currency.USD, 1));
 
-    //     Portfolio portfolio = new Portfolio();
-    //     portfolio.addInPortfolio("EUR", 10)
-        
-    //     AssertTrue(portfolio.convert() == 12);
-    // }
+        assertEquals(portfolio.findCurrency(Currency.KRW), -1);
+        assertEquals(portfolio.findCurrency(Currency.USD), 1);
+
+    }
 }
