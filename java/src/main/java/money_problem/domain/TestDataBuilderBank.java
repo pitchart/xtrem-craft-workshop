@@ -12,17 +12,10 @@ public class TestDataBuilderBank {
         this.exchangeRates = exchangeRates;
         return this;
     }
-    // getter quand la construction de l'objet est faite
-    public Map<String, Double> getExchangeRatesDataBuilderBank(){
-        return this.exchangeRates;
-    }
 
     // construction par défaut
     public Bank build() {
-        Bank b = Bank.withExchangeRate(Currency.EUR, Currency.USD, 1.2);
-        b.addExchangeRate(Currency.EUR,  Currency.KRW, 0.5);
-        b.addExchangeRate(Currency.USD, Currency.EUR, 1.2);
-        return b;
+        return new Bank(this.exchangeRates);
     }
 
 }
