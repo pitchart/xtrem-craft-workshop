@@ -6,6 +6,7 @@ import java.util.Map;
 public class TestDataBuilderBank {
 
     private Map<String, Double> exchangeRates;
+    private Currency pivotCurrency;
 
     // setter pour la construction chainée
     public TestDataBuilderBank withExchangeRateBuilder(HashMap<String, Double> exchangeRates) {
@@ -13,9 +14,14 @@ public class TestDataBuilderBank {
         return this;
     }
 
+    public TestDataBuilderBank pivotCurrencySetter(Currency pivotCurrency) {
+        this.pivotCurrency = pivotCurrency;
+        return this;
+    }
+
     // construction par défaut
     public Bank build() {
-        return new Bank(this.exchangeRates);
+        return new Bank(this.exchangeRates, this.pivotCurrency);
     }
 
 }

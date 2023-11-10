@@ -15,9 +15,10 @@ class BankTest {
         TestDataBuilderBank t = new TestDataBuilderBank();
         HashMap<String, Double> exchangeRates = new HashMap<>();
         exchangeRates.put("EUR->USD", 1.2);
-        Bank b = t.withExchangeRateBuilder(exchangeRates).build();
+        exchangeRates.put("USD->USD", 1.0);
+        Bank b = t.withExchangeRateBuilder(exchangeRates).pivotCurrencySetter(USD).build();
         double convertedMoney = b.convertMoney(new Money(EUR, 10), USD);
-        assertThat(convertedMoney).isEqualTo(12);
+        assertThat(convertedMoney).isEqualTo(12.0);
     }
 
     @Test
@@ -36,14 +37,19 @@ class BankTest {
         TestDataBuilderBank t = new TestDataBuilderBank();
         HashMap<String, Double> exchangeRates1 = new HashMap<>();
         HashMap<String, Double> exchangeRates2 = new HashMap<>();
-        exchangeRates1.put("EUR->USD", 1.2);
-        exchangeRates2.put("EUR->USD", 1.3);
-        Bank b = t.withExchangeRateBuilder(exchangeRates1).build();
+        exchangeRates1.put("EUR->USD", 1.2);        
+
+        exchangeRates2.put("EUR->USD", 1.321);        
+        exchangeRates2.put("USD->KRW", 10.0);
+
+        Bank b = t.withExchangeRateBuilder(exchangeRates1).pivotCurrencySetter(USD).build();
+        System.out.println(b);
         double firstConvertedMoney = b.convertMoney(new Money(EUR, 10), USD);
         assertThat(firstConvertedMoney).isEqualTo(12);
 
-        Bank b2 = t.withExchangeRateBuilder(exchangeRates2).build();
-        double secondConvertedMoney = b2.convertMoney(new Money(EUR, 10), USD);
-        assertThat(secondConvertedMoney).isEqualTo(13);
+        Bank b2 = t.withExchangeRateBuilder(exchangeRates2).pivotCurrencySetter(USD).build();
+        double secondConvertedMoney = b2.convertMoney(new Money(EUR, 10), KRW);
+
+        assertThat(secondConvertedMoney).isEqualTo(132.10);
     }
 }

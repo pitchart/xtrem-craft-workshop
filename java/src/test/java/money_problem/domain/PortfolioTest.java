@@ -1,15 +1,8 @@
 package money_problem.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.HashMap;
-
 import static money_problem.domain.Currency.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class PortfolioTest {
 
