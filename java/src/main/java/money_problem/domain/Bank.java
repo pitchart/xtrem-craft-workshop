@@ -43,15 +43,6 @@ public final class Bank {
 
             BigDecimal bd = new BigDecimal(amount).setScale(2, RoundingMode.HALF_UP);  
             amount =  bd.doubleValue(); 
-
-            // if (exchangeRates.get(pivotCurrency + "->" + currency) != null) {
-            //     amount = money.getAmount() * exchangeRates.get(pivotCurrency + "->" + currency);
-            // }
-            // if (money.getCurrency() != pivotCurrency) {
-            //     amount = amount * exchangeRates.get(money.getCurrency() + "->" + currency);
-            //     BigDecimal bd = new BigDecimal(amount).setScale(2, RoundingMode.HALF_UP);  
-            //     res = bd.doubleValue();  
-            // }
         
         return amount;
     }
