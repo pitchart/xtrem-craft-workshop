@@ -8,17 +8,21 @@
 - USD : dollars américain (monnaie américaine)
 - KRW : Won sud-coréen (monnaie sud-coréeenne)
 
-Exchange rate
-Convert
-
-
 ## Properties
 
-- 
+- Convert
+- Add
+- Multiply
+- Divide
+- Exchange Rate
+- Currency
+- Pivot currency
+- Portfolio
+- Money
 
 ## Responsibilities
 
-- 
+- No money lost during a conversion
 
 ## Invariants
 
@@ -26,4 +30,6 @@ Convert
 
 ## Collaborators
 
-- 
+- pitest (mutation testing)
+- GitHub (CI)
+- DataBuilder
