@@ -1,3 +1,9 @@
+# Membres
+ABE Naoki  
+DULUC Sarah  
+RETAIL Hugo
+RIMONTEIL Evan  
+
 # Xtrem Craft workshop
 
 This workshop is based on the [Xtrem TDD workshop](https://github.com/les-tontons-crafters/xtrem-tdd-money-kata), 
@@ -52,3 +58,4 @@ We have structured this workshop using the [4C model](https://www.bowperson.com/
 - [Concepts](docs/concepts.md)
 - [Concrete Practice](docs/facilitation.md)
 - [Conclusion](docs/conclusion.md)
+
