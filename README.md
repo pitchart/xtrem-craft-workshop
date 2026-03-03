@@ -4,6 +4,10 @@ BENONY Clément
 DUMARCHAT Gurvan
 PUIGSECH Rémi
 
+# Language
+
+TypeScript
+
 # Xtrem Craft workshop
 
 This workshop is based on the [Xtrem TDD workshop](https://github.com/les-tontons-crafters/xtrem-tdd-money-kata), 
