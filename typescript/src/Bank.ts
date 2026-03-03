@@ -1,39 +1,52 @@
-import {Currency} from './Currency'
-import {MissingExchangeRateError} from './MissingExchangeRateError'
+import { Currency } from './Currency'
+import { DuplicateCurrencyError } from './DuplicateCurrencyError'
 
 export class Bank {
   private readonly _exchangeRates: Map<string, number> = new Map()
 
+  
   /**
-   * @param currency1
-   * @param currency2
+   * Convert from one currency to another using the provided exchange rate.
+   * @param from
+   * @param to
    * @param rate
    */
-  static withExchangeRate (currency1: Currency, currency2: Currency, rate: number): Bank {
+  static createWithExchangeRate(from: Currency, to: Currency, rate: number): Bank {
     const bank = new Bank()
-    bank.AddExchangeRate(currency1, currency2, rate)
+    bank.addExchangeRate(from, to, rate)
     return bank
   }
 
   /**
-   * @param currency1
-   * @param currency2
+   * Add exchange rate to the bank.
+   * @param from
+   * @param to
    * @param rate
    */
-  AddExchangeRate (currency1: Currency, currency2: Currency, rate: number): void {
-    this._exchangeRates.set(currency1 + '->' + currency2, rate)
+  addExchangeRate(from: Currency, to: Currency, rate: number): void {
+    this._exchangeRates.set(this.getExchangeRateKey(from, to), rate)
   }
 
   /**
+   * Convert from one currency to another using the exchange rate provided in the bank.
    * @param amount
-   * @param currency1
-   * @param currency2
+   * @param from
+   * @param to
    */
-  Convert (amount: number, currency1: Currency, currency2: Currency): number {
-    if (!(currency1 === currency2 || this._exchangeRates.has(currency1 + '->' + currency2))) { throw new MissingExchangeRateError(currency1, currency2) }
+  convert(amount: number, from: Currency, to: Currency): number {
+    const isSameCurrency: boolean = from !== to && !this._exchangeRates.has(this.getExchangeRateKey(from, to))
 
-    return currency2 === currency1
-        ? amount
-        : amount * (this._exchangeRates.get(currency1 + '->' + currency2) ?? 0)
+    if (isSameCurrency) { throw new DuplicateCurrencyError(from, to) }
+
+    if (to === from) {
+      return amount
+    }
+
+    return amount * (this._exchangeRates.get(this.getExchangeRateKey(from, to)) ?? 0)
+
+  }
+
+  private getExchangeRateKey(from: Currency, to: Currency): string {
+    return this.getExchangeRateKey(from, to)
   }
 }
