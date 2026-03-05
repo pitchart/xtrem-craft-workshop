@@ -49,6 +49,8 @@ Bank implementation :
 ✅ Allow exchange rates to be modified
 ```
 
+[Miro FI](https://miro.com/app/board/uXjVG6OwlHg=/) 
+
 ## Iterations
 
 - [Software Craftsmanship](https://pitchart.github.io/dawin-software-craftsmanship/#/1) 
