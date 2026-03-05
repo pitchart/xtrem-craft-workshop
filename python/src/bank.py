@@ -10,16 +10,22 @@ class Bank:
         self._exchange_rate = exchange_rate
 
     @staticmethod
-    def create(currency1: Currency, currency2: Currency, rate: float) -> "Bank":
+    def create(from_currency: Currency, to_currency: Currency, rate: float) -> "Bank":
         bank = Bank({})
-        bank.addEchangeRate(currency1, currency2, rate)
+        bank.addEchangeRate(from_currency, to_currency, rate)
 
         return bank
     
-    def addEchangeRate(self, currency1: Currency, currency2: Currency, rate: float) -> None:
-        self._exchange_rate[f'{currency1.value}->{currency2.value}'] = rate
+    def addEchangeRate(self, from_currency: Currency, to_currency: Currency, rate: float) -> None:
+        self._exchange_rate[f'{from_currency.value}->{to_currency.value}'] = rate
 
-    def convert(self, amount: float, currency1: Currency, currency2: Currency) -> float:
-        if not (currency1.value == currency2.value or f'{currency1.value}->{currency2.value}' in self._exchange_rate):
-            raise MissingExchangeRateError(currency1, currency2)
-        return amount if currency1.value == currency2.value  else amount * self._exchange_rate[f'{currency1.value}->{currency2.value}']
+    def convert(self, amount: float, from_currency: Currency, to_currency: Currency) -> float:
+        exchange_rate =f'{from_currency.value}->{to_currency.value}' 
+
+        if not (from_currency.value == to_currency.value or  exchange_rate in self._exchange_rate):
+            raise MissingExchangeRateError(from_currency, to_currency)
+        
+        if from_currency.value == to_currency.value :
+            return amount
+        
+        return amount * self._exchange_rate[exchange_rate]
