@@ -4,24 +4,46 @@ import { DuplicateCurrencyError } from '../src/DuplicateCurrencyError'
 
 describe('Bank', function () {
 
-  test('convert from eur to usd returns number', () => {
-    expect(Bank.createWithExchangeRate(Currency.EUR, Currency.USD, 1.2).convert(10, Currency.EUR, Currency.USD)).toBe(12)
+  test('should convert between different currencies when exchange rate is provided', () => {
+    //ARRANGE
+    const bank = Bank.createWithExchangeRate(Currency.EUR, Currency.USD, 1.2);
+    //ACT
+    const amount = bank.convert(10, Currency.EUR, Currency.USD);
+    //ASSERT
+    expect(amount).toBe(12);
   })
 
-  test('convert from usd to usd returns same value', () => {
-    expect(Bank.createWithExchangeRate(Currency.EUR, Currency.USD, 1.2).convert(10, Currency.EUR, Currency.EUR)).toBe(10)
+  test('Should test if converting two same currencies return same value', () => {
+    //ARRANGE
+    const bank = Bank.createWithExchangeRate(Currency.EUR, Currency.USD, 1.2)
+    //ACT
+    const amount = bank.convert(10, Currency.EUR, Currency.EUR)
+    //ASSERT
+    expect(amount).toBe(10)
   })
 
-  test('convert throws error in case of missing exchange rates', () => {
-    expect(() => Bank.createWithExchangeRate(Currency.EUR, Currency.USD, 1.2).convert(10, Currency.EUR, Currency.KRW))
+  test('Should test if converting without an exchange rate return an error', () => {
+    //ARRANGE
+    const bank = Bank.createWithExchangeRate(Currency.EUR, Currency.USD, 1.2)
+    //ACT
+    const amount = () => bank.convert(10, Currency.EUR, Currency.KRW)
+    //ASSERT
+    expect(amount())
       .toThrow(DuplicateCurrencyError)
   })
 
   test('convert with different exchange rates returns different numbers', () => {
-    expect(Bank.createWithExchangeRate(Currency.EUR, Currency.USD, 1.2).convert(10, Currency.EUR, Currency.USD)).toBe(12)
+    //ARRANGE
+    const currency1 = Currency.EUR
+    const currency2 = Currency.USD
+    const bank = Bank.createWithExchangeRate(currency1, currency2, 1.2);
+    //ACT
+    const result12 = bank.convert(10, currency1, currency2);
+    bank.addExchangeRate(currency1, currency2, 1.3);
+    const result13 = bank.convert(10, currency1, currency2);
+    //ASSERT
+    expect(result12).toBe(12)
+    expect(result13).toBe(13)
 
-    expect(Bank.createWithExchangeRate(Currency.EUR, Currency.USD, 1.3).convert(10, Currency.EUR, Currency.USD)).toBe(13)
-
-    expect(Bank.createWithExchangeRate(Currency.EUR, Currency.USD, 1.5).convert(10, Currency.EUR, Currency.USD)).toBe(15)
   })
 })
