@@ -49,7 +49,8 @@ Bank implementation :
 ✅ Allow exchange rates to be modified
 ```
 
-[Miro FI](https://miro.com/app/board/uXjVG6OwlHg=/) 
+[Miro FI](https://miro.com/app/board/uXjVG6OwlHg=/)
+[Miro ALT B](https://miro.com/app/board/uXjVG6Op2Fs=/)
 
 ## Iterations
 
