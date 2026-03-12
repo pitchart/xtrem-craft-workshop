@@ -715,18 +715,6 @@ wheels = [
 ]
 
 [[package]]
-name = "pytest-pythonpath"
-version = "0.7.4"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "pytest" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/e4/2d/b7495359273a96b87528b5dcaa80fdd47524df9067ecbf5fa01776d419dc/pytest-pythonpath-0.7.4.tar.gz", hash = "sha256:64e195b23a8f8c0c631fb16882d9ad6fa4137ed1f2961ddd15d52065cd435db6", size = 4383, upload-time = "2022-02-10T15:03:02.058Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/77/f9/cdff595776d35031576c9be6d362a3e610e9085edf07508902c05c8896f8/pytest_pythonpath-0.7.4-py3-none-any.whl", hash = "sha256:e73e11dab2f0b83e73229e261242b251f0a369d7f527dbfec068822fd26a6ce5", size = 3660, upload-time = "2022-02-10T15:03:00.637Z" },
-]
-
-[[package]]
 name = "pytest-watch"
 version = "4.2.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1233,7 +1221,7 @@ wheels = [
 [[package]]
 name = "xtrem-craft-workshop"
 version = "1.0.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "approvaltests" },
     { name = "coverage", extra = ["toml"] },
@@ -1245,7 +1233,6 @@ dependencies = [
     { name = "pytest-approvaltests" },
     { name = "pytest-assertions" },
     { name = "pytest-cov" },
-    { name = "pytest-pythonpath", marker = "python_full_version < '4'" },
     { name = "pytest-watch" },
     { name = "ruff" },
     { name = "taskipy" },
@@ -1266,7 +1253,6 @@ requires-dist = [
     { name = "pytest-approvaltests", specifier = ">=0.2.3" },
     { name = "pytest-assertions", specifier = ">=0.5.0" },
     { name = "pytest-cov", marker = "python_full_version >= '3.9'", specifier = "~=6.0.0" },
-    { name = "pytest-pythonpath", marker = "python_full_version >= '2.6' and python_full_version < '4'", specifier = "==0.7.4" },
     { name = "pytest-watch", specifier = "==4.2.0" },
     { name = "ruff", specifier = ">=0.15.0" },
     { name = "taskipy", specifier = ">=1.14.1" },
