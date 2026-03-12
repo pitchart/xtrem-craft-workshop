@@ -5,30 +5,37 @@ import { Currency } from '../src/Currency'
 
 
 describe("portfolio", function(){
-    it("should evaluate an empty portfolio", ()=>{
+    test("should evaluate an empty portfolio", ()=>{
+        //ARRANGE
         const portfolio = new Portfolio();
-        const bank = Bank.withExchangeRate(Currency.EUR, Currency.USD, 1.2);
-        expect(portfolio.evaluate(bank, Currency.USD)).toBe(0);
+        //ASSERT
+        expect(portfolio.getCurrencies().size).toBe(0);
     });
 
-    it("should", ()=>{
-        const portfolio = new Portfolio();
-        const bank = Bank.withExchangeRate(Currency.EUR, Currency.USD, 1.2);
-
-        portfolio.deposit(10, Currency.USD);
-        expect(portfolio.evaluate(bank, Currency.USD)).toBe(10);
-    })
-
-    it("should throw an error if the bank doesnt know the exchange rate", ()=>{
-        const portfolio = new Portfolio();
-        const bank = Bank.withExchangeRate(Currency.EUR, Currency.USD, 1.6);
-    })
-
-    it("when we add money it should only add on the same currency", ()=>{
+    test("when we add money it should only add on the same currency", ()=>{
+        //ARRANGE
         const portfolio = new Portfolio();
         portfolio.addMoneyInACurrency(100, Currency.EUR)
         portfolio.addMoneyInACurrency(8, Currency.USD)
         portfolio.addMoneyInACurrency(12, Currency.EUR)
-        expect(portfolio.getMoneyInAcurrency).toBe(112);
-    })
+        //ACT
+        const currencies = portfolio.getCurrencies();
+        //ASSERT
+        expect(currencies.get(Currency.EUR)).toBe(112);
+    });
+
+    test("should sum eur and usd together and return the right usd amount", ()=>{
+        //ARRANGE
+        const portfolio = new Portfolio();
+        const bank = new Bank();
+        bank.addExchangeRate(Currency.EUR, Currency.USD, 1.4)
+        portfolio.addMoneyInACurrency(10, Currency.EUR);
+        portfolio.addMoneyInACurrency(1, Currency.USD);
+        //ACT
+        const sum:number = portfolio.sumCurrenciesInOneCurrency(Currency.USD, bank);
+        //ASSERT
+        expect(sum).toBe(15);
+    });
+
+
 })
