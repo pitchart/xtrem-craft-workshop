@@ -385,3 +385,6 @@ reports/
 vendor/
 composer.phar
 composer.lock
+
+.stryker
+stryker-tmp/

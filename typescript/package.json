@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest",
     "tdd": "jest --watchAll",
-    "coverage": "jest --collect-coverage"
+    "coverage": "jest --collect-coverage",
+    "build": "tsc -p .",
+    "mutation": "stryker run stryker.conf.json"
   },
   "author": "",
   "license": "ISC",
