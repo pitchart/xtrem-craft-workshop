@@ -19,7 +19,7 @@ Vous pouvez également joindre une photo du résultat obtenu en utilisant les po
 
 ## Évaluation d'un portefeuille
 
-[![StickerCollab](/docs/img/2025-2026-S6B-ALT-BenonyPuigsechDumarchat.png)](https://www.oreilly.com/library/view/learning-test-driven-development/9781098106461/)
+[![StickerCollab](/docs/img/2025-2026-S6B-ALT-BenonyPuigsechDumarchat.jpg)](https://www.oreilly.com/library/view/learning-test-driven-development/9781098106461/)
 
 
 
