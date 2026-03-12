@@ -3,12 +3,12 @@
   "_comment": "This config was generated using 'stryker init'. Please take a look at: https://stryker-mutator.io/docs/stryker-js/configuration/ for more information",
   "tempDirName": "stryker-tmp",
   "packageManager": "npm",
-  "reporters": [
-    "html",
-    "clear-text",
-    "progress"
-  ],
+  "reporters": ["html", "clear-text", "progress"],
+  "plugins": ["@stryker-mutator/jest-runner"],
   "testRunner": "jest",
   "coverageAnalysis": "perTest",
-  "allowConsoleColors": true
+  "allowConsoleColors": true,
+  "htmlReporter": {
+    "baseDir": "../docs/solution/mutation-testing"
+  }
 }
