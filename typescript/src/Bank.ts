@@ -1,10 +1,9 @@
-import { Currency } from './Currency'
-import { DuplicateCurrencyError } from './DuplicateCurrencyError'
+import { Currency } from './Currency';
+import { MissingExchangeRateError } from './MissingExchangeRateError';
 
 export class Bank {
-  private readonly _exchangeRates: Map<string, number> = new Map()
+  private readonly _exchangeRates: Map<string, number> = new Map();
 
-  
   /**
    * Convert from one currency to another using the provided exchange rate.
    * @param from
@@ -12,9 +11,9 @@ export class Bank {
    * @param rate
    */
   static createWithExchangeRate(from: Currency, to: Currency, rate: number): Bank {
-    const bank = new Bank()
-    bank.addExchangeRate(from, to, rate)
-    return bank
+    const bank = new Bank();
+    bank.addExchangeRate(from, to, rate);
+    return bank;
   }
 
   /**
@@ -24,7 +23,7 @@ export class Bank {
    * @param rate
    */
   addExchangeRate(from: Currency, to: Currency, rate: number): void {
-    this._exchangeRates.set(this.getExchangeRateKey(from, to), rate)
+    this._exchangeRates.set(this.getExchangeRateKey(from, to), rate);
   }
 
   /**
@@ -34,19 +33,20 @@ export class Bank {
    * @param to
    */
   convert(amount: number, from: Currency, to: Currency): number {
-    const isSameCurrency: boolean = from !== to && !this._exchangeRates.has(this.getExchangeRateKey(from, to))
+    const exchangeRateIsMissing: boolean = from !== to && !this._exchangeRates.has(this.getExchangeRateKey(from, to));
 
-    if (isSameCurrency) { throw new DuplicateCurrencyError(from, to) }
-
-    if (to === from) {
-      return amount
+    if (exchangeRateIsMissing) {
+      throw new MissingExchangeRateError(from, to);
     }
 
-    return amount * (this._exchangeRates.get(this.getExchangeRateKey(from, to)) ?? 0)
+    if (to === from) {
+      return amount;
+    }
 
+    return amount * (this._exchangeRates.get(this.getExchangeRateKey(from, to)) ?? 0);
   }
 
   private getExchangeRateKey(from: Currency, to: Currency): string {
-    return this.getExchangeRateKey(from, to)
+    return `${from}->${to}`;
   }
 }
