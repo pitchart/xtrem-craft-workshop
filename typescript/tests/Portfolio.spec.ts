@@ -26,7 +26,7 @@ describe('portfolio', function () {
     //ARRANGE
     const portfolio = new Portfolio();
     const bank = new Bank();
-    bank.addExchangeRate(Currency.EUR, Currency.USD, 1.5);
+    bank.addExchangeRate(Currency.EUR, Currency.USD, 1.4);
     portfolio.addMoneyInACurrency(10, Currency.EUR);
     portfolio.addMoneyInACurrency(1, Currency.USD);
     //ACT
