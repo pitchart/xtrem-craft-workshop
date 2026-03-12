@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "tdd": "jest --watchAll",
-    "coverage": "jest --collect-coverage"
+    "coverage": "jest --collect-coverage",
+    "build": "tsc -p ."
   },
   "author": "",
   "license": "ISC",
