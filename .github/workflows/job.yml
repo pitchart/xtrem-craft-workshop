@@ -56,4 +56,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mutation-testing-report
-          path: ../docs/solution/mutation-testing
+          path: ./docs/solution/mutation-testing
