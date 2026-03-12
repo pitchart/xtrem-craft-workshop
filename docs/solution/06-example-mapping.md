@@ -1,7 +1,8 @@
 # Example Mapping
 
 ## Format de restitution
-*(rappel, pour chaque US)*
+
+_(rappel, pour chaque US)_
 
 ```markdown
 ## Titre de l'US (post-it jaunes)
@@ -19,8 +20,52 @@ Vous pouvez également joindre une photo du résultat obtenu en utilisant les po
 
 ## Évaluation d'un portefeuille
 
-[![StickerCollab](/docs/img/2025-2026-S6B-ALT-BenonyPuigsechDumarchat.jpg)](https://www.oreilly.com/library/view/learning-test-driven-development/9781098106461/)
+### Somme des valeurs du portfolio
 
+```
+Given a portfolio with
+      - 10 EUR
+      - 1 USD
+When compute the sum in USD
+Then the sum equals 10.9USD
+```
 
+```
+Given a portfolio with
+      - 1 EUR
+      - 10 USD
+When compute the sum in USD
+Then the sum equals 11.1USD
+```
 
+### Ajout de monnaie
 
+```
+Given a portfolio with
+      - 1 EUR
+      - 1 USD
+When Adding 1 USD
+Then the portfolio is :
+      - 2 USD
+      - 1 EUR
+```
+
+### Conversion avec une banque disposant des taux de change
+
+```
+Given a portfolio
+      With 11 USD
+      And a bank knowing the USD-EUR Rate
+When Computing sum in EUR
+Then the sum equals 10.5EUR
+```
+
+### Conversion avec une banque ne disposant pas des taux de change
+
+```
+Given a portfolio
+      With 11 USD
+      A bank not knowing the USD-EUR Rate
+When compute the sum in EUR
+Then a MissingExchangeRateError is thrown
+```
