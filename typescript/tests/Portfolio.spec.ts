@@ -1,6 +1,7 @@
 import { Bank } from '../src/Bank';
 import { Currency } from '../src/Currency';
 import { Portfolio } from '../src/Portfolio';
+import Money from "../src/Money";
 
 describe('portfolio', function () {
   test('should evaluate an empty portfolio', () => {
@@ -13,13 +14,14 @@ describe('portfolio', function () {
   test('when we add money it should only add on the same currency', () => {
     //ARRANGE
     const portfolio = new Portfolio();
-    portfolio.addMoneyInACurrency(100, Currency.EUR);
-    portfolio.addMoneyInACurrency(8, Currency.USD);
-    portfolio.addMoneyInACurrency(12, Currency.EUR);
+    portfolio.addMoneyInACurrency(new Money(100, Currency.EUR));
+    portfolio.addMoneyInACurrency(new Money(8, Currency.USD));
+    portfolio.addMoneyInACurrency(new Money(12, Currency.EUR));
+    const expectedEur = new Money(112, Currency.EUR);
     //ACT
     const currencies = portfolio.getCurrencies();
     //ASSERT
-    expect(currencies.get(Currency.EUR)).toBe(112);
+    expect(currencies.get(Currency.EUR)).toStrictEqual(expectedEur);
   });
 
   test('should sum eur and usd together and return the right usd amount', () => {
@@ -27,11 +29,11 @@ describe('portfolio', function () {
     const portfolio = new Portfolio();
     const bank = new Bank();
     bank.addExchangeRate(Currency.EUR, Currency.USD, 1.4);
-    portfolio.addMoneyInACurrency(10, Currency.EUR);
-    portfolio.addMoneyInACurrency(1, Currency.USD);
+    portfolio.addMoneyInACurrency(new Money(10, Currency.EUR));
+    portfolio.addMoneyInACurrency(new Money(1, Currency.USD));
     //ACT
-    const sum: number = portfolio.sumCurrenciesInOneCurrency(Currency.USD, bank);
+    const sum: Money = portfolio.sumCurrenciesInOneCurrency(Currency.USD, bank);
     //ASSERT
-    expect(sum).toBe(15);
+    expect(sum.amount).toBe(15);
   });
 });

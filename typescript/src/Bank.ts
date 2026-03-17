@@ -1,5 +1,6 @@
 import { Currency } from './Currency';
 import { MissingExchangeRateError } from './MissingExchangeRateError';
+import Money from "@xtrem-craft/Money";
 
 export class Bank {
   private readonly _exchangeRates: Map<string, number> = new Map();
@@ -28,22 +29,23 @@ export class Bank {
 
   /**
    * Convert from one currency to another using the exchange rate provided in the bank.
-   * @param amount
-   * @param from
    * @param to
+   * @param baseMoney
    */
-  convert(amount: number, from: Currency, to: Currency): number {
-    const exchangeRateIsMissing: boolean = from !== to && !this._exchangeRates.has(this.getExchangeRateKey(from, to));
+  convert(to: Currency, baseMoney: Money): Money {
+    const fromCurrency = baseMoney.currency;
+    const exchangeRateIsMissing: boolean = fromCurrency !== to && !this._exchangeRates.has(this.getExchangeRateKey(fromCurrency, to));
 
     if (exchangeRateIsMissing) {
-      throw new MissingExchangeRateError(from, to);
+      throw new MissingExchangeRateError(fromCurrency, to);
     }
 
-    if (to === from) {
-      return amount;
+    if (to === fromCurrency) {
+      return baseMoney;
     }
-
-    return amount * (this._exchangeRates.get(this.getExchangeRateKey(from, to)) ?? 0);
+    const rate = (this._exchangeRates.get(this.getExchangeRateKey(fromCurrency, to)) ?? 0)
+    const newAmount = baseMoney.amount * rate;
+    return new Money(newAmount,to);
   }
 
   private getExchangeRateKey(from: Currency, to: Currency): string {

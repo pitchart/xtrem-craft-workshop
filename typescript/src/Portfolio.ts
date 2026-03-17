@@ -1,28 +1,33 @@
 import { Bank } from './Bank';
-import { Currency } from './Currency'
+import { Currency } from './Currency';
+import Money from "@xtrem-craft/Money";
 
 export class Portfolio {
-  private readonly Currencies: Map<Currency, number> = new Map()
-
-  
+  private moneys: Map<Currency,Money> = new Map();
   /**
    * Add an amount of money into our portfolio in a specific currency
-   * @param quantity
-   * @param currency
+   * @param money
    */
-  addMoneyInACurrency(quantity: number, currency: Currency) {
-    this.Currencies.set(currency, (this.Currencies.get(currency) ?? 0) + quantity);
+  addMoneyInACurrency(money : Money) {
+    let relevantMoney = this.moneys.get(money.currency);
+    if(!relevantMoney){
+      const newMoney = new Money(0,money.currency);
+      this.moneys.set(money.currency, newMoney);
+      relevantMoney = newMoney;
+    }
+    const newMoney = relevantMoney.add(money);
+    this.moneys.set(money.currency, newMoney);
   }
 
-  getCurrencies(): Map<Currency, number> {
-    return this.Currencies
+  getCurrencies(): Map<Currency,Money>{
+    return this.moneys;
   }
 
-  sumCurrenciesInOneCurrency(resultIn:Currency, bank:Bank): number {
-    let result = 0;
-    this.Currencies.forEach((value, currency) => {
-      result += bank.convert(value, currency, resultIn);
+  sumCurrenciesInOneCurrency(resultIn:Currency, bank:Bank): Money {
+    let result = new Money(0, resultIn);
+    this.moneys.forEach((value) => {
+      result = result.add(bank.convert(resultIn, value));
     });
-    return result
+    return result;
   }
 }

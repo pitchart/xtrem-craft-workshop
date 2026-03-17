@@ -1,46 +1,55 @@
 import { Bank } from '../src/Bank';
 import { Currency } from '../src/Currency';
 import { MissingExchangeRateError } from '../src/MissingExchangeRateError';
+import Money from "../src/Money";
 
 describe('Bank', function () {
-  test('should convert between different currencies when exchange rate is provided', () => {
+  it('should convert between different currencies when exchange rate is provided', () => {
     //ARRANGE
     const bank = Bank.createWithExchangeRate(Currency.EUR, Currency.USD, 1.2);
+    const to = Currency.USD;
+    const baseMoney = new Money(10,Currency.EUR);
     //ACT
-    const amount = bank.convert(10, Currency.EUR, Currency.USD);
+    const amount = bank.convert(to, baseMoney);
     //ASSERT
-    expect(amount).toBe(12);
+    expect(amount.amount).toBe(12);
   });
 
-  test('Should test if converting two same currencies return same value', () => {
+  it('Should test if converting two same currencies return same value', () => {
     //ARRANGE
     const bank = Bank.createWithExchangeRate(Currency.EUR, Currency.USD, 1.2);
+    const to = Currency.EUR;
+    const baseMoney = new Money(10,Currency.EUR);
     //ACT
-    const amount = bank.convert(10, Currency.EUR, Currency.EUR);
+    const amount = bank.convert(to, baseMoney);
     //ASSERT
-    expect(amount).toBe(10);
+    expect(amount.amount).toBe(10);
   });
 
-  test('Should test if converting without an exchange rate return an error', () => {
+  it('Should test if converting without an exchange rate return an error', () => {
     //ARRANGE
     const bank = Bank.createWithExchangeRate(Currency.EUR, Currency.USD, 1.2);
+    const to = Currency.KRW;
+    const baseMoney = new Money(10,Currency.EUR);
     //ACT
-    const amount = () => bank.convert(10, Currency.EUR, Currency.KRW);
+    const amount = () => bank.convert(to, baseMoney);
     //ASSERT
     expect(amount).toThrowError(MissingExchangeRateError);
   });
 
-  test('convert with different exchange rates returns different numbers', () => {
+  it('convert with different exchange rates returns different numbers', () => {
     //ARRANGE
     const currency1 = Currency.EUR;
     const currency2 = Currency.USD;
     const bank = Bank.createWithExchangeRate(currency1, currency2, 1.2);
+    const to = currency2;
+    const baseMoney = new Money(10,currency1);
     //ACT
-    const result12 = bank.convert(10, currency1, currency2);
+    const result12 = bank.convert(to, baseMoney);
     bank.addExchangeRate(currency1, currency2, 1.3);
-    const result13 = bank.convert(10, currency1, currency2);
+    const result13 = bank.convert(to, baseMoney);
     //ASSERT
-    expect(result12).toBe(12);
-    expect(result13).toBe(13);
+    expect(result12.amount).toBe(12);
+    expect(result13.amount).toBe(13);
   });
 });
